@@ -37,6 +37,6 @@ void Init_T2(void)
 	IFS0bits.T2IF = 0; // clear interrupt flag
 	IEC0bits.T2IE = 1; // enable interrupt
 
-	T2CONbits.TON = 1; // T2 on 
+	// T2CONbits.TON = 1; // T2 on 
 }
 
