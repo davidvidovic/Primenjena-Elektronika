@@ -4,7 +4,7 @@
 void initUART1(void)
 {
 	// U1BRG registar se koristi za odredjivanje baudrate-a pri serijskoj komunikaciji
-	// U1BRG = [ (10 000 000 / 3) / (16 * baudrate) ] - 1
+	// U1BRG = [ (10 000 000) / (16 * baudrate) ] - 1
     U1BRG = 0x0040; // BAUDRATE = 9600
 	
 	// U1MODEbits.ALTIO registar se koristi za biranje alternativnog porta za serijsku komunikaciju

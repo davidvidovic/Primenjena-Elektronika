@@ -1,14 +1,14 @@
 #include <p30fxxxx.h>
 #include "timer.h"
 
-// TIMER1 radi svakih 1ms
-// TIMER2 radi svake 1us
+// TIMER1 radi svakih 1us
+// TIMER2 radi svake 1ms
 
-#define TMR1_period 10000 /*  Fosc = 10MHz,
+#define TMR1_period 10 /*  Fosc = 10MHz,
+					          1/Fosc = 0.1us !!!, 0.1us * 10 = 1us  */
+
+#define TMR2_period 10000 /*  Fosc = 10MHz,
 					          1/Fosc = 0.1us !!!, 0.1us * 10000 = 1ms  */
-
-#define TMR2_period 10000 /*  Fosc = 10MHz/3 = 3.33Mhz,
-					          1/Fosc = 0.3us !!!, 0.3us * 3.33 = 1us  */
 
 
 void Init_T1(void)
@@ -22,7 +22,7 @@ void Init_T1(void)
 	IFS0bits.T1IF = 0; // clear interrupt flag
 	IEC0bits.T1IE = 1; // enable interrupt
 
-	T1CONbits.TON = 1; // T1 on
+	// T1CONbits.TON = 1; // T1 on
 }
 
 
