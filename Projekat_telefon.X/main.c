@@ -75,7 +75,6 @@ unsigned int sirovi0, sirovi1, sirovi2;
 unsigned int temp0, temp1, temp2; 
 int i;
 
-
 static const unsigned char BROJ_RACUNAR[MAX_UNESENI_BROJ] = "1234";
 unsigned char uneseni_broj[MAX_UNESENI_BROJ] = "1234";
 int indeks_uneseni_broj = 0;
@@ -84,16 +83,6 @@ unsigned char flag_TACAN_BROJ;
 static const unsigned char BROJ_MIKROKONTROLER[MAX_UNESENI_BROJ] = "9876";
 unsigned char uart_broj[MAX_UNESENI_BROJ];
 int indeks_uart_broj = 0;
-
-
-//unsigned char BROJ_RACUNAR[MAX_UNESENI_BROJ] = "1234";
-//unsigned char uneseni_broj[MAX_UNESENI_BROJ];
-//int indeks_uneseni_broj = 0;
-//unsigned char flag_TACAN_BROJ;
-//
-//int BROJ_MIKROKONTROLER[MAX_UNESENI_BROJ] = {9,8,7,6};
-//int uart_broj[MAX_UNESENI_BROJ];
-//int indeks_uart_broj = 0;
 
 // -----------------------------------
 // PREKIDNE RUTINE
@@ -107,9 +96,7 @@ void __attribute__((__interrupt__)) _ADCInterrupt(void)
 	temp0=sirovi0;
 	temp1=sirovi1;
     temp2=sirovi2;
-    
-    RS232_putst("AD\n");
-    
+
     ADCON1bits.ADON = 0;
     IFS0bits.ADIF = 0;
 } 
@@ -118,7 +105,6 @@ void __attribute__ ((__interrupt__)) _T1Interrupt(void) // svakih 1us
 {
 	TMR1 = 0;   
 	brojac_us++; // brojac mikrosekundi
-    //RS232_putst("T1\n");
 	IFS0bits.T1IF = 0;    
 } 
   
@@ -126,16 +112,11 @@ void __attribute__ ((__interrupt__)) _T2Interrupt(void) // svakih 1ms
 {
 	TMR2 = 0;   
 	brojac_ms++; // brojac milisekundi
-    //RS232_putst("T2\n");
 	IFS0bits.T2IF = 0;    
 } 
 
 void __attribute__((__interrupt__)) _U1RXInterrupt(void) // interrupt za UART
 {
-    //IFS0bits.U1RXIF = 0; 
-    
-    WriteUART1('r');
-    
     uart_broj[indeks_uart_broj] = U1RXREG;
     
     if(indeks_uart_broj < MAX_UNESENI_BROJ - 1)
@@ -157,7 +138,6 @@ void __attribute__((__interrupt__)) _U1RXInterrupt(void) // interrupt za UART
 
 void Delay_ms(int pauza)
 {
-    // RS232_putst("Delay MS\n");
     brojac_ms = 0;
     T2CONbits.TON = 1; // T2 on
     
@@ -168,7 +148,6 @@ void Delay_ms(int pauza)
 
 void Delay_us(int pauza)
 {
-    // RS232_putst("Delay US\n");
     brojac_us = 0;
     T1CONbits.TON = 1; // T1 on
     
@@ -192,7 +171,6 @@ void buzz_taster();
 void buzz_otkljucavanje();
 void buzz_UART_POZIV();
 void buzz_pijan();
-
 
 // -----------------------------------
 // GLCD FUNKCIJE
@@ -253,33 +231,33 @@ int main(int argc, char** argv) {
     
     RS232_putst("INIT\n");
     
-//    uneseni_broj[0] = '1';
-//    uneseni_broj[1] = '6';
-//    uneseni_broj[2] = '4';
-//    indeks_uneseni_broj = 3;
+//    indeks_uneseni_broj = 4;
     
     while(1)
     {  
         // PROVEJRAVAS MQ3
-        //ADCON1bits.ADON = 1;
-        //RS232_putst("1\n");
-        //Delay_ms(20);
-        //ADCON1bits.ADON = 0;
-        //RS232_putst("0\n");
+        ADCON1bits.ADON = 1;
+        Delay_ms(20);
         
-//        if(temp2 > 2000)
-//        {
-//            GLCD_ClrScr();
-//            GLCD_DisplayPicture(displej_pijan);
-//            
-//            while(temp2 > 2000) // cekaj da se otrezni
-//            {
-//                buzz_pijan();
-//            }
-//            
-//            stanje = ZAKLJUCAN_EKRAN;
-//            GLCD_ClrScr();
-//        }
+        if(temp2 > 2000)
+        {
+            GLCD_ClrScr();
+            GLCD_DisplayPicture(displej_pijan);
+            
+            RS232_putst("KORISNIK JE PIJAN!\n");
+            
+            while(temp2 > 2000) // cekaj da se otrijezni
+            {              
+                buzz_pijan();
+                ADCON1bits.ADON = 1;
+                Delay_ms(20);
+            }
+            
+            RS232_putst("KORISNIK SE OTRIJEZNIO!\n");
+            
+            stanje = ZAKLJUCAN_EKRAN;
+            GLCD_ClrScr();
+        }
        
         // PROVJERAVAS DA LI JE DOSLO DO POZIVA SA RACUNARA
         if(stanje != POZIV_UART)
@@ -297,12 +275,6 @@ int main(int argc, char** argv) {
                 GLCD_ClrScr();
                 GLCD_DisplayPicture(displej_poziv_uart);
             }
-            //else
-            //{
-                //RS232_putst("Netacan broj mikrokontrolera\n");
-                //indeks_uart_broj = 0;
-                //uart_broj[indeks_uart_broj] = '\0';
-            //}
         }
         
         // STATE MACHINE
@@ -323,14 +295,14 @@ int main(int argc, char** argv) {
                 
                 // PROVJERAVAM TOUCH SCREEN
                 // Ako se pritisne bilo gdje budi se ekran
-                //Touch_Panel();
-//                if(X > 0 && X < 128 && Y > 0 && Y < 64)
-//                {
-//                    RS232_putst("TELEFON OTKLJUCAN DODIROM\n");
-//                    buzz_otkljucavanje();
-//                    stanje = POCETNI_EKRAN;
-//                    GLCD_ClrScr();
-//                }
+                Touch_Panel();
+                if(X > 0 && X < 128 && Y > 0 && Y < 64)
+                {
+                    RS232_putst("TELEFON OTKLJUCAN DODIROM\n");
+                    buzz_otkljucavanje();
+                    stanje = POCETNI_EKRAN;
+                    GLCD_ClrScr();
+                }
                 
             break;
                 
@@ -342,18 +314,10 @@ int main(int argc, char** argv) {
 				GLCD_DisplayPicture(tastatura);
 				GoToXY(0, 0);
 				GLCD_Printf(uneseni_broj);
-                
-//                for(i = 0; i < indeks_uneseni_broj; i++)
-//                {
-//                    GoToXY(0, i*6);
-//                    Glcd_PutChar(uneseni_broj[i]+'0');
-//                }
-				
+                			
 				// Citamo pritisnute tastere, pozivom na pravi broj : 1234 odlazimo u POZIV
-//				Touch_Panel();
-//				provera_pritisnutog_tastera();
-				
-				
+				Touch_Panel();
+				provera_pritisnutog_tastera();	
 			break;
 			
 			
@@ -363,9 +327,18 @@ int main(int argc, char** argv) {
 				GLCD_ClrScr();
                 GLCD_DisplayPicture(displej_poziv);
                 RS232_putst("MIKROKONTROLER VAS JE NAZVAO\n");
-				Delay_ms(5000);
+                
+                // AKO BUDE SKAKAO NEGDJE DRUGO SAMO STAVI DELAY BEY FORA
+				for(i = 0; i < 5; i++)
+                {
+                    RS232_putst("...\n");
+                    Delay_ms(1000);
+                }
+                // Delay_ms(5000);
+                
                 RS232_putst("POZIV ZAVRSEN\n");
 				spusti_slusalicu();
+                //uneseni_broj = "";
 				
 				stanje = POCETNI_EKRAN;
                 GLCD_ClrScr();
@@ -376,33 +349,42 @@ int main(int argc, char** argv) {
 			
 				buzz_UART_POZIV();
 				
-//                Touch_Panel();
-//                if(X > 0 && X < 64) // prihvatio poziv
-//                {
-//                    podigni_slusalicu();
-//                    GLCD_ClrScr();
-//                    GLCD_DisplayPicture(displej_poziv_uart_prihvacen);
-//                    Delay_ms(5000);
-//                    spusti_slusalicu();
-//                    stanje = ZAKLJUCAN_EKRAN;
-//                    GLCD_ClrScr();
-//                }
-//				if(X > 64 && X < 128) // odbio poziv
-//                {
-//                    GLCD_ClrScr();
-//                    GLCD_DisplayPicture(displej_poziv_uart_odbijen);
-//                    Delay_ms(5000);
-//                    stanje = ZAKLJUCAN_EKRAN;
-//                    GLCD_ClrScr();
-//                }
+                Touch_Panel();
+                //if(X > 0 && X < 64) // prihvatio poziv
+                //{
+                    podigni_slusalicu();
+                    GLCD_ClrScr();
+                    GLCD_DisplayPicture(displej_poziv_uart_prihvacen);
+                    RS232_putst("POZIV PRIHVACEN\n");
+                    
+                    // AKO BUDE SKAKAO NEGDJE DRUGO SAMO STAVI DELAY BEY FORA
+                    for(i = 0; i < 5; i++)
+                    {
+                        RS232_putst("...\n");
+                        Delay_ms(1000);
+                    }
+                    // Delay_ms(5000);
+
+                    RS232_putst("POZIV ZAVRSEN\n");
+                    spusti_slusalicu();
+                    
+                    //uart_broj = "1111";
+                    stanje = ZAKLJUCAN_EKRAN;
+                    GLCD_ClrScr();
+                //}
+				if(X > 64 && X < 128) // odbio poziv
+                {
+                    GLCD_ClrScr();
+                    GLCD_DisplayPicture(displej_poziv_uart_odbijen);
+                    Delay_ms(5000);
+                    stanje = ZAKLJUCAN_EKRAN;
+                    GLCD_ClrScr();
+                    //uart_broj = "1111";
+                }
 				
 
 			break;
 			
-            
-			
-			
-            
 			case SLABA_BATERIJA:
 				
 			break;
@@ -426,13 +408,11 @@ void generisanje_PWM_servo(int pauza)
 
 void spusti_slusalicu()
 {
-    RS232_putst("SPUSTENA SLUSALICA\n");
     generisanje_PWM_servo(1);
 }
 
 void podigni_slusalicu()
 {
-    RS232_putst("DIGNUTA SLUSALICA\n");
     generisanje_PWM_servo(2);
 }
 
@@ -469,7 +449,6 @@ void buzz_pijan()
 }
 
 
-
 // -----------------------------------
 // GLCD FUNKCIJE
 
@@ -481,17 +460,16 @@ void Touch_Panel (void)
 	DRIVE_A = 1;  
 	DRIVE_B = 0;
     
-    // LATCbits.LATC13=1;
-    // LATCbits.LATC14=0;
 
 	Delay_ms(500); //cekamo jedno vreme da se odradi AD konverzija
-				
+	
 	// ocitavamo x	
-	x_vrednost = temp0;//temp0 je vrednost koji nam daje AD konvertor na BOTTOM pinu		
-
+	x_vrednost = temp0;//temp0 je vrednost koji nam daje AD konvertor na BOTTOM pinu
+    
+    ADCON1bits.ADON = 1;
+    
 	// vode vertikalni tranzistori
-    // LATCbits.LATC13=0;
-    // LATCbits.LATC14=1;
+    
 	DRIVE_A = 0;  
 	DRIVE_B = 1;
 
@@ -516,7 +494,6 @@ void Touch_Panel (void)
 
 //	Y= ((y_vrednost-AD_Ymin)/(AD_Ymax-AD_Ymin))*64;
     
-    ADCON1bits.ADON = 0;
 }
 
 void provera_pritisnutog_tastera()
