@@ -8,7 +8,7 @@
 
  _FOSC(CSW_FSCM_OFF & XT_PLL4); //instruction takt je isti kao i kristal
 //_FOSC(CSW_ON_FSCM_OFF & HS3_PLL4);
-//_FWDT(WDT_OFF);
+_FWDT(WDT_OFF);
 //_FGS(CODE_PROT_OFF);
 
 #define DRIVE_A PORTCbits.RC13
@@ -34,9 +34,9 @@
 // B5 - 
 // B6 - 
 // B7 - 
-// B8 - 
-// B9 - 
-// B10 -  
+// B8 - TOUCH SCREEN?
+// B9 - TOUCH SCREEN?
+// B10 -  MQ3
 // B11 - PIR
 // B12 - SERVO
 //
@@ -71,8 +71,8 @@ int brojac_ms, brojac_us;
 char tempRX;
 
 unsigned int X, Y, x_vrednost, y_vrednost;
-unsigned int sirovi0, sirovi1;
-unsigned int temp0, temp1; 
+unsigned int sirovi0, sirovi1, sirovi2;
+unsigned int temp0, temp1, temp2; 
 int i;
 
 
@@ -102,10 +102,15 @@ void __attribute__((__interrupt__)) _ADCInterrupt(void)
 {
 	sirovi0=ADCBUF0;
 	sirovi1=ADCBUF1;
+    sirovi2=ADCBUF2;
 
 	temp0=sirovi0;
 	temp1=sirovi1;
-
+    temp2=sirovi2;
+    
+    RS232_putst("AD\n");
+    
+    ADCON1bits.ADON = 0;
     IFS0bits.ADIF = 0;
 } 
 
@@ -113,7 +118,7 @@ void __attribute__ ((__interrupt__)) _T1Interrupt(void) // svakih 1us
 {
 	TMR1 = 0;   
 	brojac_us++; // brojac mikrosekundi
-
+    //RS232_putst("T1\n");
 	IFS0bits.T1IF = 0;    
 } 
   
@@ -121,17 +126,19 @@ void __attribute__ ((__interrupt__)) _T2Interrupt(void) // svakih 1ms
 {
 	TMR2 = 0;   
 	brojac_ms++; // brojac milisekundi
-
+    //RS232_putst("T2\n");
 	IFS0bits.T2IF = 0;    
 } 
 
 void __attribute__((__interrupt__)) _U1RXInterrupt(void) // interrupt za UART
 {
-    IFS0bits.U1RXIF = 0; 
+    //IFS0bits.U1RXIF = 0; 
     
-    uart_broj[indeks_uart_broj] = (int)U1RXREG;
+    WriteUART1('r');
     
-    if(indeks_uart_broj < MAX_UNESENI_BROJ)
+    uart_broj[indeks_uart_broj] = U1RXREG;
+    
+    if(indeks_uart_broj < MAX_UNESENI_BROJ - 1)
     {
         indeks_uart_broj++;
     }
@@ -140,6 +147,8 @@ void __attribute__((__interrupt__)) _U1RXInterrupt(void) // interrupt za UART
         //RS232_putst(uart_broj);
         indeks_uart_broj = 0;
     }
+    
+    IFS0bits.U1RXIF = 0;
 } 
 
 
@@ -148,6 +157,7 @@ void __attribute__((__interrupt__)) _U1RXInterrupt(void) // interrupt za UART
 
 void Delay_ms(int pauza)
 {
+    // RS232_putst("Delay MS\n");
     brojac_ms = 0;
     T2CONbits.TON = 1; // T2 on
     
@@ -158,6 +168,7 @@ void Delay_ms(int pauza)
 
 void Delay_us(int pauza)
 {
+    // RS232_putst("Delay US\n");
     brojac_us = 0;
     T1CONbits.TON = 1; // T1 on
     
@@ -180,6 +191,7 @@ void generisanje_PWM_buzzer(int pauza);
 void buzz_taster();
 void buzz_otkljucavanje();
 void buzz_UART_POZIV();
+void buzz_pijan();
 
 
 // -----------------------------------
@@ -193,16 +205,22 @@ static const unsigned char displej_poziv[1024];
 static const unsigned char displej_poziv_uart[1024];
 static const unsigned char displej_poziv_uart_prihvacen[1024];
 static const unsigned char displej_poziv_uart_odbijen[1024];
-
+static const unsigned char displej_pijan[1024];
 
 // -----------------------------------
 // MAIN FUNKCIJA
 
 int main(int argc, char** argv) {
     
+    // -----------------------------------
     // INICIJALIZACIJA PINOVA
+    
     // BUZZER - izlaz
     TRISAbits.TRISA11 = 0;
+    
+    // MQ3
+    ADPCFGbits.PCFG10 = 0; 
+    TRISBbits.TRISB10 = 1;
     
     // PIR - digitalni - ulaz
     ADPCFGbits.PCFG11 = 1; 
@@ -211,6 +229,9 @@ int main(int argc, char** argv) {
     // SERVO - digitalni - izlaz
     ADPCFGbits.PCFG12 = 1; 
     TRISBbits.TRISB12 = 0;
+
+    
+    // -----------------------------------
     
     Init_T1();
     Init_T2();
@@ -228,33 +249,40 @@ int main(int argc, char** argv) {
     
     stanje = ZAKLJUCAN_EKRAN;
     spusti_slusalicu();
+    ADCON1bits.ADON = 0;
     
+    RS232_putst("INIT\n");
     
 //    uneseni_broj[0] = '1';
 //    uneseni_broj[1] = '6';
 //    uneseni_broj[2] = '4';
-    indeks_uneseni_broj = 3;
+//    indeks_uneseni_broj = 3;
     
     while(1)
-    { 
-        //RS232_putst(uart_broj);
-        //RS232_putst("\n");
-        
-        /*
-        RS232_putst("Broj je: ");
-        for(i = 0; i < indeks_uneseni_broj; i++)
-                {
-                    WriteUART1(uneseni_broj[i]);
-                }
-        RS232_putst("\n");
-        
-        */
-        // ADC ON
+    {  
         // PROVEJRAVAS MQ3
-        // ADC OFF
+        //ADCON1bits.ADON = 1;
+        //RS232_putst("1\n");
+        //Delay_ms(20);
+        //ADCON1bits.ADON = 0;
+        //RS232_putst("0\n");
         
+//        if(temp2 > 2000)
+//        {
+//            GLCD_ClrScr();
+//            GLCD_DisplayPicture(displej_pijan);
+//            
+//            while(temp2 > 2000) // cekaj da se otrezni
+//            {
+//                buzz_pijan();
+//            }
+//            
+//            stanje = ZAKLJUCAN_EKRAN;
+//            GLCD_ClrScr();
+//        }
+       
         // PROVJERAVAS DA LI JE DOSLO DO POZIVA SA RACUNARA
-        if(indeks_uart_broj == MAX_UNESENI_BROJ)
+        if(stanje != POZIV_UART)
         {
             flag_TACAN_BROJ = 1;
             for(i = 0; i < MAX_UNESENI_BROJ; i++)
@@ -265,14 +293,16 @@ int main(int argc, char** argv) {
             if(flag_TACAN_BROJ)
             {
                 stanje = POZIV_UART;
+                RS232_putst("POZVAN MIKROKONTROLER\n");
                 GLCD_ClrScr();
+                GLCD_DisplayPicture(displej_poziv_uart);
             }
-            else
-            {
-                RS232_putst("Netacan broj mikrokontrolera\n");
-                indeks_uart_broj = 0;
+            //else
+            //{
+                //RS232_putst("Netacan broj mikrokontrolera\n");
+                //indeks_uart_broj = 0;
                 //uart_broj[indeks_uart_broj] = '\0';
-            }
+            //}
         }
         
         // STATE MACHINE
@@ -293,14 +323,14 @@ int main(int argc, char** argv) {
                 
                 // PROVJERAVAM TOUCH SCREEN
                 // Ako se pritisne bilo gdje budi se ekran
-                Touch_Panel();
-                if(X > 0 && X < 128 && Y > 0 && Y < 64)
-                {
-                    RS232_putst("TELEFON OTKLJUCAN DODIROM\n");
-                    buzz_otkljucavanje();
-                    stanje = POCETNI_EKRAN;
-                    GLCD_ClrScr();
-                }
+                //Touch_Panel();
+//                if(X > 0 && X < 128 && Y > 0 && Y < 64)
+//                {
+//                    RS232_putst("TELEFON OTKLJUCAN DODIROM\n");
+//                    buzz_otkljucavanje();
+//                    stanje = POCETNI_EKRAN;
+//                    GLCD_ClrScr();
+//                }
                 
             break;
                 
@@ -310,18 +340,18 @@ int main(int argc, char** argv) {
 				podigni_slusalicu();
                 
 				GLCD_DisplayPicture(tastatura);
-				//GoToXY(0, 0);
-				//GLCD_Printf(uneseni_broj);
+				GoToXY(0, 0);
+				GLCD_Printf(uneseni_broj);
                 
-                for(i = 0; i < indeks_uneseni_broj; i++)
-                {
-                    GoToXY(0, i*6);
-                    Glcd_PutChar(uneseni_broj[i]+'0');
-                }
+//                for(i = 0; i < indeks_uneseni_broj; i++)
+//                {
+//                    GoToXY(0, i*6);
+//                    Glcd_PutChar(uneseni_broj[i]+'0');
+//                }
 				
 				// Citamo pritisnute tastere, pozivom na pravi broj : 1234 odlazimo u POZIV
-				Touch_Panel();
-				provera_pritisnutog_tastera();
+//				Touch_Panel();
+//				provera_pritisnutog_tastera();
 				
 				
 			break;
@@ -345,32 +375,34 @@ int main(int argc, char** argv) {
             case POZIV_UART:
 			
 				buzz_UART_POZIV();
-				GLCD_ClrScr();
-                GLCD_DisplayPicture(displej_poziv_uart);
 				
-                Touch_Panel();
-                if(X > 0 && X < 64) // prihvatio poziv
-                {
-                    podigni_slusalicu();
-                    GLCD_ClrScr();
-                    GLCD_DisplayPicture(displej_poziv_uart_prihvacen);
-                    Delay_ms(5000);
-                    spusti_slusalicu();
-                }
-				if(X > 64 && X < 128) // odbio poziv
-                {
-                    GLCD_ClrScr();
-                    GLCD_DisplayPicture(displej_poziv_uart_odbijen);
-                    Delay_ms(5000);
-                }
+//                Touch_Panel();
+//                if(X > 0 && X < 64) // prihvatio poziv
+//                {
+//                    podigni_slusalicu();
+//                    GLCD_ClrScr();
+//                    GLCD_DisplayPicture(displej_poziv_uart_prihvacen);
+//                    Delay_ms(5000);
+//                    spusti_slusalicu();
+//                    stanje = ZAKLJUCAN_EKRAN;
+//                    GLCD_ClrScr();
+//                }
+//				if(X > 64 && X < 128) // odbio poziv
+//                {
+//                    GLCD_ClrScr();
+//                    GLCD_DisplayPicture(displej_poziv_uart_odbijen);
+//                    Delay_ms(5000);
+//                    stanje = ZAKLJUCAN_EKRAN;
+//                    GLCD_ClrScr();
+//                }
 				
 
-				stanje = POCETNI_EKRAN;
-                GLCD_ClrScr();
 			break;
 			
+            
 			
 			
+            
 			case SLABA_BATERIJA:
 				
 			break;
@@ -394,11 +426,13 @@ void generisanje_PWM_servo(int pauza)
 
 void spusti_slusalicu()
 {
+    RS232_putst("SPUSTENA SLUSALICA\n");
     generisanje_PWM_servo(1);
 }
 
 void podigni_slusalicu()
 {
+    RS232_putst("DIGNUTA SLUSALICA\n");
     generisanje_PWM_servo(2);
 }
 
@@ -426,7 +460,12 @@ void buzz_otkljucavanje()
 
 void buzz_UART_POZIV()
 {
-    generisanje_PWM_buzzer(100);
+    generisanje_PWM_buzzer(700);
+}
+
+void buzz_pijan()
+{
+    generisanje_PWM_buzzer(900);
 }
 
 
@@ -445,7 +484,7 @@ void Touch_Panel (void)
     // LATCbits.LATC13=1;
     // LATCbits.LATC14=0;
 
-	//Delay(500); //cekamo jedno vreme da se odradi AD konverzija
+	Delay_ms(500); //cekamo jedno vreme da se odradi AD konverzija
 				
 	// ocitavamo x	
 	x_vrednost = temp0;//temp0 je vrednost koji nam daje AD konvertor na BOTTOM pinu		
@@ -456,7 +495,7 @@ void Touch_Panel (void)
 	DRIVE_A = 0;  
 	DRIVE_B = 1;
 
-	//Delay(500); //cekamo jedno vreme da se odradi AD konverzija
+	Delay_ms(500); //cekamo jedno vreme da se odradi AD konverzija
 	
 	// ocitavamo y	
 	y_vrednost = temp1;// temp1 je vrednost koji nam daje AD konvertor na LEFT pinu	
@@ -1015,6 +1054,74 @@ static const unsigned char displej_poziv_uart_odbijen[1024] =
    0,  0,  0, 62,  2,  2, 62,  0,128,254,  0,  0, 60, 42, 42, 46, 
    0, 64,170,170,170, 66,  0, 42, 42, 42, 62,  0,  0,  0, 44,  4, 
    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 
+};
+
+static const unsigned char displej_pijan[1024] =
+{
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,248,248,248, 
+  56, 56, 56, 56,120,240,240,224,  0,  0,  0,248,248,248,  0,  0, 
+   0,  0,  0,  0,248,248,248,  0,  0,  0,  0,  0,  0,  0,224,248, 
+ 120,120,248,240,128,  0,  0,  0,  0,  0,  0,248,248,248,248,248, 
+ 224,128,  0,  0,  0,  0,248,248,248,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,192,224,240,248, 56, 56, 56, 56,120,112,  0,  0,  0,  0, 
+ 248,248,248,  0,  0,  0,  0,  0,252,252,252,248,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,255,255,255, 
+  56, 56, 56, 56, 60, 31, 15,  7,  0,  0,  0,255,255,255,  0,  0, 
+   0,  0,  0,  0,255,255,255,  0,  0,  0,  0,224,248,255,255,227, 
+ 224,224,227,255,255,254,240,128,  0,  0,  0,255,255,255,  0,  1, 
+   7, 31,126,248,224,  0,255,255,255,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  1,  7, 15, 15, 30, 30, 60, 60,248,248,224,  0,  0,  0, 
+ 255,255,255,  0,  0,  0,  0,  0,  1,127,127,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 15, 15, 15, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 15, 15, 15,  0,  0, 
+   7, 14, 14, 15, 15,  7,  3,  0,  0,  8, 15, 15, 15,  1,  0,  0, 
+   0,  0,  0,  0,  0,  7, 15, 15, 12,  0,  0, 15, 15, 15,  0,  0, 
+   0,  0,  0,  1,  7, 15, 15, 15, 15,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  7, 15, 14, 14, 14, 14, 14, 15,  7,  3,  1,  0,  0,  0, 
+  15, 15, 15,  0,  0,  0,  0,  0,  6, 15, 15,  6,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,254, 18, 18, 30,236,  0,  0,254,254,  0, 
+   0,  0,  0,252,134,  2,  2,  2,134,252,  0,  0,254, 48, 56,236, 
+ 134,  2,  0,254,  0,  0,254, 18, 18,114,238,  0,  0,224,124, 70, 
+  78,120,192,  0,  0,254, 14, 28, 48,224,192,254,  0,  0,  0,  0, 
+   2,  2,254,254,  2,  2,  0,254, 18, 18, 18,  2,  0,254,254,  0, 
+   0,  0,  0,254, 18, 18, 18,  2,  0,254, 34, 34, 34,  0,  0,252, 
+ 134,  2,  2,  2,134,252,  0,  0,254, 14, 28, 48,224,192,254,  0, 
+   0,131,191,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+   0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  0,  0,  0,  1,  1,  1, 
+   1,  0,  0,  0,  1,  1,  1,  1,  1,  0,  0,  0,  1,  0,  0,  0, 
+   1,  1,  0,  1,  0,  0,  1,  0,  0,  0,  1,  1,  1,  1,  0,  0, 
+   0,  0,  1,  1,  0,  1,  0,  0,  0,  0,  1,  1,  0,  0,  0,  0, 
+   0,  0,  1,  1,  0,  0,  0,  1,  1,  1,  1,  1,  0,  1,  1,  1, 
+   1,  0,  0,  1,  1,  1,  1,  1,  0,  1,  0,  0,  0,  0,  0,  0, 
+   1,  1,  1,  1,  1,  0,  0,  0,  1,  0,  0,  0,  0,  1,  1,  0, 
+   0,  1,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 

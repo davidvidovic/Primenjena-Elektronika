@@ -118,7 +118,7 @@ void ADCinit(void)
 
 	ADCON2bits.VCFG=7;
 	ADCON2bits.CSCNA=1;
-	ADCON2bits.SMPI=1;
+	ADCON2bits.SMPI=2;
 	ADCON2bits.BUFM=0;
 	ADCON2bits.ALTS=0;
 
@@ -178,7 +178,7 @@ void ADCinit(void)
 		1 = Analog input pin in Digital mode, port read input enabled, A/D input multiplexer input connected to AVSS
 		0 = Analog input pin in Analog mode, port read input disabled, A/D samples pin voltage*/
 
-	//ADPCFG=0; 
+	// ADPCFG=0; 
 
 
 	/*ADCSSL: A/D Input Scan Select Register
@@ -187,7 +187,7 @@ void ADCinit(void)
 		1 = Select ANx for input scan
 		0 = Skip ANx for input scan*/
 	//ADCSSL=0b0001111111111111;
-	ADCSSL=0b0000001100000000;
+	ADCSSL=0b0000011100000000;
 	ADCON1bits.ASAM = 1;
 
 	IFS0bits.ADIF=1;
