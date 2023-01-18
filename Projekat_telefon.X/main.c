@@ -11,14 +11,14 @@
 _FWDT(WDT_OFF);
 //_FGS(CODE_PROT_OFF);
 
-#define DRIVE_A PORTCbits.RC13
-#define DRIVE_B PORTCbits.RC14
+#define DRIVE_A LATCbits.LATC13
+#define DRIVE_B LATCbits.LATC14
 #define PIR_SENZOR PORTBbits.RB11
  
 #define MAX_UNESENI_BROJ 4
 
 // TIMER:
-// TIMER1 - GLCD
+// TIMER1 - DELAY
 // TIMER2 - DELAY
 // TIMER3 - 
 //
@@ -75,8 +75,8 @@ unsigned int sirovi0, sirovi1, sirovi2;
 unsigned int temp0, temp1, temp2; 
 int i;
 
-static const unsigned char BROJ_RACUNAR[MAX_UNESENI_BROJ] = "1234";
-unsigned char uneseni_broj[MAX_UNESENI_BROJ] = "1234";
+static const unsigned char BROJ_RACUNAR[MAX_UNESENI_BROJ] = "1447";
+unsigned char uneseni_broj[MAX_UNESENI_BROJ];
 int indeks_uneseni_broj = 0;
 unsigned char flag_TACAN_BROJ;
 
@@ -125,11 +125,17 @@ void __attribute__((__interrupt__)) _U1RXInterrupt(void) // interrupt za UART
     }
     else 
     {
-        //RS232_putst(uart_broj);
+        RS232_putst(uart_broj);
         indeks_uart_broj = 0;
     }
     
     IFS0bits.U1RXIF = 0;
+    
+//    RS232_putst("UART_BROJ: ");
+//    RS232_putst(uart_broj);
+//    RS232_putst("   I indeks je ");
+//    WriteUART1dec2string(indeks_uart_broj);
+//    RS232_putst("\n");
 } 
 
 
@@ -235,29 +241,32 @@ int main(int argc, char** argv) {
     
     while(1)
     {  
-        // PROVEJRAVAS MQ3
-        ADCON1bits.ADON = 1;
-        Delay_ms(20);
         
-        if(temp2 > 2000)
-        {
-            GLCD_ClrScr();
-            GLCD_DisplayPicture(displej_pijan);
-            
-            RS232_putst("KORISNIK JE PIJAN!\n");
-            
-            while(temp2 > 2000) // cekaj da se otrijezni
-            {              
-                buzz_pijan();
-                ADCON1bits.ADON = 1;
-                Delay_ms(20);
-            }
-            
-            RS232_putst("KORISNIK SE OTRIJEZNIO!\n");
-            
-            stanje = ZAKLJUCAN_EKRAN;
-            GLCD_ClrScr();
-        }
+        
+        
+        // PROVEJRAVAS MQ3
+//        ADCON1bits.ADON = 1;
+//        Delay_ms(20);
+//        
+//        if(temp2 > 2000)
+//        {
+//            GLCD_ClrScr();
+//            GLCD_DisplayPicture(displej_pijan);
+//            
+//            RS232_putst("KORISNIK JE PIJAN!\n");
+//            
+//            while(temp2 > 2000) // cekaj da se otrijezni
+//            {              
+//                buzz_pijan();
+//                ADCON1bits.ADON = 1;
+//                Delay_ms(20);
+//            }
+//            
+//            RS232_putst("KORISNIK SE OTRIJEZNIO!\n");
+//            
+//            stanje = ZAKLJUCAN_EKRAN;
+//            GLCD_ClrScr();
+//        }
        
         // PROVJERAVAS DA LI JE DOSLO DO POZIVA SA RACUNARA
         if(stanje != POZIV_UART)
@@ -315,7 +324,7 @@ int main(int argc, char** argv) {
 				GoToXY(0, 0);
 				GLCD_Printf(uneseni_broj);
                 			
-				// Citamo pritisnute tastere, pozivom na pravi broj : 1234 odlazimo u POZIV
+				// Citamo pritisnute tastere, pozivom na pravi broj : 1447 odlazimo u POZIV
 				Touch_Panel();
 				provera_pritisnutog_tastera();	
 			break;
@@ -338,7 +347,7 @@ int main(int argc, char** argv) {
                 
                 RS232_putst("POZIV ZAVRSEN\n");
 				spusti_slusalicu();
-                //uneseni_broj = "";
+                uneseni_broj[0] = '\0';
 				
 				stanje = POCETNI_EKRAN;
                 GLCD_ClrScr();
@@ -350,8 +359,8 @@ int main(int argc, char** argv) {
 				buzz_UART_POZIV();
 				
                 Touch_Panel();
-                //if(X > 0 && X < 64) // prihvatio poziv
-                //{
+                if(X > 0 && X < 64) // prihvatio poziv
+                {
                     podigni_slusalicu();
                     GLCD_ClrScr();
                     GLCD_DisplayPicture(displej_poziv_uart_prihvacen);
@@ -368,18 +377,20 @@ int main(int argc, char** argv) {
                     RS232_putst("POZIV ZAVRSEN\n");
                     spusti_slusalicu();
                     
-                    //uart_broj = "1111";
+                    uart_broj[0] = '\0';
+                    indeks_uart_broj = 0;
                     stanje = ZAKLJUCAN_EKRAN;
                     GLCD_ClrScr();
-                //}
+                }
 				if(X > 64 && X < 128) // odbio poziv
                 {
                     GLCD_ClrScr();
                     GLCD_DisplayPicture(displej_poziv_uart_odbijen);
                     Delay_ms(5000);
+                    uart_broj[0] = '\0';
+                    indeks_uart_broj = 0;
                     stanje = ZAKLJUCAN_EKRAN;
                     GLCD_ClrScr();
-                    //uart_broj = "1111";
                 }
 				
 
@@ -400,10 +411,13 @@ int main(int argc, char** argv) {
 
 void generisanje_PWM_servo(int pauza)
 {
-    LATBbits.LATB12 = 1;
-    Delay_ms(pauza);
-    LATBbits.LATB12 = 0;
-    Delay_ms(20-pauza);
+    for(i = 0; i < 5; i++)
+    {
+        LATBbits.LATB12 = 1;
+        Delay_ms(pauza);
+        LATBbits.LATB12 = 0;
+        Delay_ms(20-pauza);
+    }
 }
 
 void spusti_slusalicu()
@@ -454,101 +468,140 @@ void buzz_pijan()
 
 void Touch_Panel (void)
 {
-    ADCON1bits.ADON = 1;
+    
     
 // vode horizontalni tranzistori
 	DRIVE_A = 1;  
 	DRIVE_B = 0;
     
-
-	Delay_ms(500); //cekamo jedno vreme da se odradi AD konverzija
+    ADCON1bits.ADON = 1;
+	Delay_ms(50); //cekamo jedno vreme da se odradi AD konverzija
 	
 	// ocitavamo x	
 	x_vrednost = temp0;//temp0 je vrednost koji nam daje AD konvertor na BOTTOM pinu
+    X=(x_vrednost-161)*0.03629;
+//    RS232_putst("Ocitao x_vrednost = ");
+//    WriteUART1dec2string(x_vrednost);
+//    RS232_putst("\n");
     
-    ADCON1bits.ADON = 1;
     
 	// vode vertikalni tranzistori
     
 	DRIVE_A = 0;  
 	DRIVE_B = 1;
-
-	Delay_ms(500); //cekamo jedno vreme da se odradi AD konverzija
+    
+    ADCON1bits.ADON = 1;
+	Delay_ms(50); //cekamo jedno vreme da se odradi AD konverzija
 	
 	// ocitavamo y	
 	y_vrednost = temp1;// temp1 je vrednost koji nam daje AD konvertor na LEFT pinu	
+    
+//    RS232_putst("Ocitao y_vrednost = ");
+//    WriteUART1dec2string(y_vrednost);
+//    RS232_putst("\n");
 	
 //Ako ?elimo da nam X i Y koordinate budu kao rezolucija ekrana 128x64 treba skalirati vrednosti x_vrednost i y_vrednost tako da budu u opsegu od 0-128 odnosno 0-64
 //skaliranje x-koordinate
 
-    X=(x_vrednost-161)*0.03629;
-
-
+    X=(x_vrednost-250)*0.04063;
+    
 
 //X= ((x_vrednost-AD_Xmin)/(AD_Xmax-AD_Xmin))*128;	
 //vrednosti AD_Xmin i AD_Xmax su minimalne i maksimalne vrednosti koje daje AD konvertor za touch panel.
 
 
 //Skaliranje Y-koordinate
-	Y= ((y_vrednost-500)*0.020725);
+	Y= ((y_vrednost-450)*0.022857);
 
-//	Y= ((y_vrednost-AD_Ymin)/(AD_Ymax-AD_Ymin))*64;
+	//Y= ((y_vrednost-AD_Ymin)/(AD_Ymax-AD_Ymin))*64;
+    
+   
     
 }
 
 void provera_pritisnutog_tastera()
 {
-    if(Y > 13 && Y < 26){
-		// buzz_taster();
+//    RS232_putst("Ocitao x_vrednost = ");
+//    WriteUART1dec2string(x_vrednost);
+//    RS232_putst("    X = ");
+//    WriteUART1dec2string(X);
+//    RS232_putst("\n");
+//        
+//    RS232_putst("Ocitao y_vrednost = ");
+//    WriteUART1dec2string(y_vrednost);
+//    RS232_putst("    Y = ");
+//    WriteUART1dec2string(Y);
+//    RS232_putst("\n");
+    
+    if(Y > 0 && Y < 13){
+		buzz_taster();
 		if(X > 84 && X < 128){
 			// POZOVI TASTER
+            RS232_putst("PRITISNUT TASTER POZOVI\n");
             if(indeks_uneseni_broj == MAX_UNESENI_BROJ)
+            {
+                flag_TACAN_BROJ = 1;
+                for(i = 0; i < MAX_UNESENI_BROJ; i++)
                 {
-                    flag_TACAN_BROJ = 1;
-                    for(i = 0; i < MAX_UNESENI_BROJ; i++)
-                                    {
-                                        if(uneseni_broj[i] != BROJ_RACUNAR[i]) flag_TACAN_BROJ = 0;
-                                    }
-                                    
-                                    if(!flag_TACAN_BROJ)
-                                    {
-                                        GLCD_ClrScr();				
-                                        GoToXY(0, 0);
-                                        GLCD_Printf("NETACAN BROJ");                                      
-                                        Delay_ms(4000);
-                                        GLCD_ClrScr();	
-                                    }
-                                    else
-                                    {
-                                        stanje = POZIV;
-                                        GLCD_ClrScr();
-                                    }
-                                    
-                                    indeks_uneseni_broj = 0;
-                                    //uneseni_broj[indeks_uneseni_broj] = '\0';
-                                    GLCD_ClrScr();
-                               }
-		
-	}
+                    if(uneseni_broj[i] != BROJ_RACUNAR[i]) flag_TACAN_BROJ = 0;
+                }
+
+                if(!flag_TACAN_BROJ)
+                {
+                    GLCD_ClrScr();				
+                    GoToXY(0, 0);
+                    GLCD_Printf("NETACAN BROJ");                                      
+                    Delay_ms(4000);
+                    GLCD_ClrScr();
+//                    uneseni_broj[0] = '\0';
+//                    indeks_uneseni_broj = 0;
+                }
+                else
+                {
+                    stanje = POZIV;
+                    GLCD_ClrScr();
+                }
+
+//                indeks_uneseni_broj = 0;
+//                uneseni_broj[indeks_uneseni_broj] = '\0';
+//                GLCD_ClrScr();
+            }
+            else
+            {
+                GLCD_ClrScr();				
+                GoToXY(0, 0);
+                GLCD_Printf("NETACAN BROJ");                                      
+                Delay_ms(4000);
+                GLCD_ClrScr();
+//                uneseni_broj[0] = '\0';
+//                indeks_uneseni_broj = 0;
+            }
+            
+            indeks_uneseni_broj = 0;
+            uneseni_broj[indeks_uneseni_broj] = '\0';
+            GLCD_ClrScr();
+        }
     }
     
-	if(indeks_uneseni_broj + 1 < MAX_UNESENI_BROJ)
-    {
+	//if(indeks_uneseni_broj + 1 < MAX_UNESENI_BROJ)
+    //{
 					
 					// Provjera prvog reda tastature
-					if(Y > 13 && Y < 26){
-						// buzz_taster();
+					if(Y > 0 && Y < 13){
+						buzz_taster();
 						if(X > 0 && X < 42){
 								// DELETE TASTER
+                                RS232_putst("PRITISNUT TASTER DELETE\n");
 								if(indeks_uneseni_broj > 0){
 									indeks_uneseni_broj--;
-									//uneseni_broj[indeks_uneseni_broj] = '\0';
+									uneseni_broj[indeks_uneseni_broj] = '\0';
 								}
                                 GLCD_ClrScr();
 						}
 						
 						if(X > 42 && X < 84){
-								uneseni_broj[indeks_uneseni_broj++] = 0;
+                                RS232_putst("PRITISNUT TASTER 0\n");
+								uneseni_broj[indeks_uneseni_broj++] = '0';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
 						}
@@ -559,22 +612,25 @@ void provera_pritisnutog_tastera()
 					}
 					
 					// Provjera drugog reda tastature
-					if(Y > 26 && Y < 39){
-						// buzz_taster();
+					if(Y > 13 && Y < 26){
+						buzz_taster();
 						if(X > 0 && X < 42){
-								uneseni_broj[indeks_uneseni_broj++] = 7;
+                                RS232_putst("PRITISNUT TASTER 7\n");
+								uneseni_broj[indeks_uneseni_broj++] = '7';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
 						}
 						
 						if(X > 42 && X < 84){
-								uneseni_broj[indeks_uneseni_broj++] = 8;
+                                RS232_putst("PRITISNUT TASTER 8\n");
+								uneseni_broj[indeks_uneseni_broj++] = '8';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
 						}
 						
 						if(X > 84 && X < 128){
-								uneseni_broj[indeks_uneseni_broj++] = 9;
+                                RS232_putst("PRITISNUT TASTER 9\n");
+								uneseni_broj[indeks_uneseni_broj++] = '9';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
 						}
@@ -582,22 +638,25 @@ void provera_pritisnutog_tastera()
 					
 					
 					// Provjera treceg reda tastature
-					if(Y > 39 && Y < 52){
-						// buzz_taster();
+					if(Y > 26 && Y < 39){
+						buzz_taster();
 						if(X > 0 && X < 42){
-								uneseni_broj[indeks_uneseni_broj++] = 4;
+                                RS232_putst("PRITISNUT TASTER 4\n");
+								uneseni_broj[indeks_uneseni_broj++] = '4';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
 						}
 						
 						if(X > 42 && X < 84){
-								uneseni_broj[indeks_uneseni_broj++] = 5;
+                                RS232_putst("PRITISNUT TASTER 5\n");
+								uneseni_broj[indeks_uneseni_broj++] = '5';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
 						}
 						
 						if(X > 84 && X < 128){
-								uneseni_broj[indeks_uneseni_broj++] = 6;
+                                RS232_putst("PRITISNUT TASTER 6\n");
+								uneseni_broj[indeks_uneseni_broj++] = '6';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
 						}
@@ -605,32 +664,35 @@ void provera_pritisnutog_tastera()
 					
 					
 					// Provjera cetvrtog reda tastature
-					if(Y > 52 && Y < 64){
-						// buzz_taster();
+					if(Y > 39 && Y < 52){
+						buzz_taster();
 						if(X > 0 && X < 42){
-								uneseni_broj[indeks_uneseni_broj++] = 1;
+                                RS232_putst("PRITISNUT TASTER 1\n");
+								uneseni_broj[indeks_uneseni_broj++] = '1';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
 						}
 						
 						if(X > 42 && X < 84){
-								uneseni_broj[indeks_uneseni_broj++] = 2;
+                                RS232_putst("PRITISNUT TASTER 2\n");
+								uneseni_broj[indeks_uneseni_broj++] = '2';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
 						}
 						
 						if(X > 84 && X < 128){
-								uneseni_broj[indeks_uneseni_broj++] = 3;
+                                RS232_putst("PRITISNUT TASTER 3\n");
+								uneseni_broj[indeks_uneseni_broj++] = '3';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
 						}
 					}
-			}
-    else
-    {
-        indeks_uneseni_broj = 0;
-        //uneseni_broj[indeks_uneseni_broj] = '\0';
-    }
+			//}
+//    else
+//    {
+//        indeks_uneseni_broj = 0;
+//        //uneseni_broj[indeks_uneseni_broj] = '\0';
+//    }
 }
 
 
