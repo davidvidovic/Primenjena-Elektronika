@@ -64,7 +64,7 @@ _FWDT(WDT_OFF);
 // -----------------------------------
 // GLOBALNE PROMENJIVE
  
-enum STATE {ZAKLJUCAN_EKRAN, POCETNI_EKRAN, POZIV, POZIV_UART, SLABA_BATERIJA};
+enum STATE {ZAKLJUCAN_EKRAN, POCETNI_EKRAN, POZIV, POZIV_UART};
 enum STATE stanje;
 
 int brojac_ms, brojac_us;
@@ -290,7 +290,7 @@ int main(int argc, char** argv) {
         switch(stanje){
             case ZAKLJUCAN_EKRAN:
                 
-                spusti_slusalicu();
+                //spusti_slusalicu();
                 GLCD_DisplayPicture(slika_zakljucan_ekran);
                 
                 // PROVJERAVAM PIR SENZOR
@@ -318,7 +318,7 @@ int main(int argc, char** argv) {
                 
 			case POCETNI_EKRAN:
                 
-				podigni_slusalicu();
+				//podigni_slusalicu();
                 
 				GLCD_DisplayPicture(tastatura);
 				GoToXY(0, 0);
@@ -384,6 +384,7 @@ int main(int argc, char** argv) {
                 }
 				if(X > 64 && X < 128) // odbio poziv
                 {
+                    RS232_putst("POZIV ODBIJEN!\n");
                     GLCD_ClrScr();
                     GLCD_DisplayPicture(displej_poziv_uart_odbijen);
                     Delay_ms(5000);
@@ -394,10 +395,6 @@ int main(int argc, char** argv) {
                 }
 				
 
-			break;
-			
-			case SLABA_BATERIJA:
-				
 			break;
 		}
         
@@ -454,7 +451,8 @@ void buzz_otkljucavanje()
 
 void buzz_UART_POZIV()
 {
-    generisanje_PWM_buzzer(700);
+    for(i = 0; i < 100; i++)
+        generisanje_PWM_buzzer(100);
 }
 
 void buzz_pijan()
@@ -537,7 +535,7 @@ void provera_pritisnutog_tastera()
 		buzz_taster();
 		if(X > 84 && X < 128){
 			// POZOVI TASTER
-            RS232_putst("PRITISNUT TASTER POZOVI\n");
+            //RS232_putst("PRITISNUT TASTER POZOVI\n");
             if(indeks_uneseni_broj == MAX_UNESENI_BROJ)
             {
                 flag_TACAN_BROJ = 1;
@@ -591,7 +589,7 @@ void provera_pritisnutog_tastera()
 						buzz_taster();
 						if(X > 0 && X < 42){
 								// DELETE TASTER
-                                RS232_putst("PRITISNUT TASTER DELETE\n");
+                                //RS232_putst("PRITISNUT TASTER DELETE\n");
 								if(indeks_uneseni_broj > 0){
 									indeks_uneseni_broj--;
 									uneseni_broj[indeks_uneseni_broj] = '\0';
@@ -600,7 +598,7 @@ void provera_pritisnutog_tastera()
 						}
 						
 						if(X > 42 && X < 84){
-                                RS232_putst("PRITISNUT TASTER 0\n");
+                                //RS232_putst("PRITISNUT TASTER 0\n");
 								uneseni_broj[indeks_uneseni_broj++] = '0';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
@@ -615,21 +613,21 @@ void provera_pritisnutog_tastera()
 					if(Y > 13 && Y < 26){
 						buzz_taster();
 						if(X > 0 && X < 42){
-                                RS232_putst("PRITISNUT TASTER 7\n");
+                                //RS232_putst("PRITISNUT TASTER 7\n");
 								uneseni_broj[indeks_uneseni_broj++] = '7';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
 						}
 						
 						if(X > 42 && X < 84){
-                                RS232_putst("PRITISNUT TASTER 8\n");
+                                //RS232_putst("PRITISNUT TASTER 8\n");
 								uneseni_broj[indeks_uneseni_broj++] = '8';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
 						}
 						
 						if(X > 84 && X < 128){
-                                RS232_putst("PRITISNUT TASTER 9\n");
+                                //RS232_putst("PRITISNUT TASTER 9\n");
 								uneseni_broj[indeks_uneseni_broj++] = '9';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
@@ -641,21 +639,21 @@ void provera_pritisnutog_tastera()
 					if(Y > 26 && Y < 39){
 						buzz_taster();
 						if(X > 0 && X < 42){
-                                RS232_putst("PRITISNUT TASTER 4\n");
+                                //RS232_putst("PRITISNUT TASTER 4\n");
 								uneseni_broj[indeks_uneseni_broj++] = '4';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
 						}
 						
 						if(X > 42 && X < 84){
-                                RS232_putst("PRITISNUT TASTER 5\n");
+                                //RS232_putst("PRITISNUT TASTER 5\n");
 								uneseni_broj[indeks_uneseni_broj++] = '5';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
 						}
 						
 						if(X > 84 && X < 128){
-                                RS232_putst("PRITISNUT TASTER 6\n");
+                                //RS232_putst("PRITISNUT TASTER 6\n");
 								uneseni_broj[indeks_uneseni_broj++] = '6';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
@@ -667,21 +665,21 @@ void provera_pritisnutog_tastera()
 					if(Y > 39 && Y < 52){
 						buzz_taster();
 						if(X > 0 && X < 42){
-                                RS232_putst("PRITISNUT TASTER 1\n");
+                                //RS232_putst("PRITISNUT TASTER 1\n");
 								uneseni_broj[indeks_uneseni_broj++] = '1';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
 						}
 						
 						if(X > 42 && X < 84){
-                                RS232_putst("PRITISNUT TASTER 2\n");
+                                //RS232_putst("PRITISNUT TASTER 2\n");
 								uneseni_broj[indeks_uneseni_broj++] = '2';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
 						}
 						
 						if(X > 84 && X < 128){
-                                RS232_putst("PRITISNUT TASTER 3\n");
+                                //RS232_putst("PRITISNUT TASTER 3\n");
 								uneseni_broj[indeks_uneseni_broj++] = '3';
 								//uneseni_broj[indeks_uneseni_broj] = '\0';
                                 GLCD_ClrScr();
