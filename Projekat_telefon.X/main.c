@@ -237,7 +237,6 @@ int main(int argc, char** argv) {
     
     RS232_putst("INIT\n");
     
-//    indeks_uneseni_broj = 4;
     
     while(1)
     {  
@@ -245,28 +244,30 @@ int main(int argc, char** argv) {
         
         
         // PROVEJRAVAS MQ3
-//        ADCON1bits.ADON = 1;
-//        Delay_ms(20);
-//        
-//        if(temp2 > 2000)
-//        {
-//            GLCD_ClrScr();
-//            GLCD_DisplayPicture(displej_pijan);
-//            
-//            RS232_putst("KORISNIK JE PIJAN!\n");
-//            
-//            while(temp2 > 2000) // cekaj da se otrijezni
-//            {              
-//                buzz_pijan();
-//                ADCON1bits.ADON = 1;
-//                Delay_ms(20);
-//            }
-//            
-//            RS232_putst("KORISNIK SE OTRIJEZNIO!\n");
-//            
-//            stanje = ZAKLJUCAN_EKRAN;
-//            GLCD_ClrScr();
-//        }
+        ADCON1bits.ADON = 1;
+        Delay_ms(20);
+//        WriteUART1dec2string(sirovi2);
+//        RS232_putst("\n");
+        
+        if(temp2 > 2000)
+        {
+            GLCD_ClrScr();
+            GLCD_DisplayPicture(displej_pijan);
+            
+            RS232_putst("KORISNIK JE PIJAN!\n");
+            
+            while(temp2 > 2000) // cekaj da se otrijezni
+            {              
+                buzz_pijan();
+                ADCON1bits.ADON = 1;
+                Delay_ms(20);
+            }
+            
+            RS232_putst("KORISNIK SE OTRIJEZNIO!\n");
+            
+            stanje = ZAKLJUCAN_EKRAN;
+            GLCD_ClrScr();
+        }
        
         // PROVJERAVAS DA LI JE DOSLO DO POZIVA SA RACUNARA
         if(stanje != POZIV_UART)
@@ -435,18 +436,24 @@ void generisanje_PWM_buzzer(int pauza)
     LATAbits.LATA11 = 1;
     Delay_us(pauza);
     LATAbits.LATA11 = 0;
-    Delay_us(1000-pauza);
+    Delay_us(500-pauza);
+    
+//    LATAbits.LATA11 = 1;
+//    Delay_us(pauza);
+//    LATAbits.LATA11 = 0;
+//    Delay_us(1000-pauza);
+    
 }
 
 void buzz_taster()
 {
-    generisanje_PWM_buzzer(500);
+    generisanje_PWM_buzzer(250);
 }
 
 void buzz_otkljucavanje()
 {
     for(i = 0; i < 100; i++)
-        generisanje_PWM_buzzer(100);
+        generisanje_PWM_buzzer(50);
 }
 
 void buzz_UART_POZIV()
@@ -457,7 +464,7 @@ void buzz_UART_POZIV()
 
 void buzz_pijan()
 {
-    generisanje_PWM_buzzer(900);
+    generisanje_PWM_buzzer(450);
 }
 
 

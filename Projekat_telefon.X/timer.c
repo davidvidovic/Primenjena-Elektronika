@@ -16,7 +16,10 @@ void Init_T1(void)
 	TMR1 = 0;
 	PR1 = TMR1_period;
 	
+    
 	T1CONbits.TCS = 0; // 0 = Internal clock (FOSC/4)
+    T1CONbits.TCKPS0 = 0;
+    T1CONbits.TCKPS1 = 0; 
 	//IPC1bits.T2IP = 3 // T1interrupt pririty (0-7)
 	//SRbits.IPL = 3; // CPU interrupt priority is 3(11)
 	IFS0bits.T1IF = 0; // clear interrupt flag
