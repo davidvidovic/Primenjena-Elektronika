@@ -10,50 +10,69 @@
 #include <stdlib.h>
 #include <p30fxxxx.h>
 #include "uart1.h"
+#include "uart2.h"
 #include "ADC.h"
 #include "timer.h"
 
- _FOSC(CSW_FSCM_OFF & XT_PLL4); // takt 10MHz
+_FOSC(CSW_FSCM_OFF & XT_PLL4); // takt 10MHz
 _FWDT(WDT_OFF); // Watch Dog Timer - OFF
 //_FGS(CODE_PROT_OFF);
 
 // -----------------------------------
+// GLOBALNE PROMENJIVE
+
+unsigned char tempRX_BLE;
+unsigned char tempRX_DEBUG;
+unsigned int broj1,broj2;
+
+// -----------------------------------
 // PREKIDNE RUTINE
 
-void __attribute__((__interrupt__)) _ADCInterrupt(void) 
-{
-	sirovi0=ADCBUF0;
-	sirovi1=ADCBUF1;
-    sirovi2=ADCBUF2;
-	sirovi3=ADCBUF3;
 
-    ADCON1bits.ADON = 0;
-    IFS0bits.ADIF = 0;
-} 
-
-void __attribute__ ((__interrupt__)) _T1Interrupt(void) // svakih 1us
+// interrupt za UART1 - BLE komunikacija
+void __attribute__((__interrupt__)) _U1RXInterrupt(void) 
 {
-	TMR1 = 0;   
-	brojac_us++; // brojac mikrosekundi
-	IFS0bits.T1IF = 0;    
-} 
-  
-void __attribute__ ((__interrupt__)) _T2Interrupt(void) // svakih 1ms
-{
-	TMR2 = 0;   
-	brojac_ms++; // brojac milisekundi
-	IFS0bits.T2IF = 0;    
-} 
-
-void __attribute__((__interrupt__)) _U1RXInterrupt(void) // interrupt za UART
-{
-    tempRX = U1RXREG;
+    tempRX_BLE = U1RXREG;
 	
     // KOD
+  
     
     IFS0bits.U1RXIF = 0;
 } 
 
+
+// interrupt za UART2 - DEBUG svrhe
+void __attribute__((__interrupt__)) _U2RXInterrupt(void) 
+{
+    tempRX_DEBUG = U2RXREG;
+	
+    // KOD
+    
+    IFS1bits.U2RXIF = 0;
+} 
+
+
+// -----------------------------------
+
+
 int main(void) {
+    // Inicijalizacija modula
+    initUART1();
+    initUART2();
+    
+    
+    print_BLE("Initicijalizacija zavrsena!\n");
+    
+    // Glavna - super petlja
+    while(1)
+    {
+        for(broj1=0;broj1<700;broj1++)
+        for(broj2=0;broj2<300;broj2++);
+        
+
+        
+        for(broj1=0;broj1<700;broj1++)
+        for(broj2=0;broj2<300;broj2++);
+    }
     return 0;
 }

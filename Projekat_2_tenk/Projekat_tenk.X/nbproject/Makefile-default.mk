@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=ADC.c timer.c uart1.c newmainXC16.c
+SOURCEFILES_QUOTED_IF_SPACED=ADC.c timer.c uart1.c newmainXC16.c uart2.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ADC.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/uart1.o ${OBJECTDIR}/newmainXC16.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/ADC.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/uart1.o.d ${OBJECTDIR}/newmainXC16.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ADC.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/uart1.o ${OBJECTDIR}/newmainXC16.o ${OBJECTDIR}/uart2.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/ADC.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/uart1.o.d ${OBJECTDIR}/newmainXC16.o.d ${OBJECTDIR}/uart2.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/ADC.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/uart1.o ${OBJECTDIR}/newmainXC16.o
+OBJECTFILES=${OBJECTDIR}/ADC.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/uart1.o ${OBJECTDIR}/newmainXC16.o ${OBJECTDIR}/uart2.o
 
 # Source Files
-SOURCEFILES=ADC.c timer.c uart1.c newmainXC16.c
+SOURCEFILES=ADC.c timer.c uart1.c newmainXC16.c uart2.c
 
 
 
@@ -119,6 +119,12 @@ ${OBJECTDIR}/newmainXC16.o: newmainXC16.c  .generated_files/flags/default/80a83e
 	@${RM} ${OBJECTDIR}/newmainXC16.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  newmainXC16.c  -o ${OBJECTDIR}/newmainXC16.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/newmainXC16.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
+${OBJECTDIR}/uart2.o: uart2.c  .generated_files/flags/default/4ba2a3760816841b7cebbf5a6eb8301ef9f40cf .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/uart2.o.d 
+	@${RM} ${OBJECTDIR}/uart2.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  uart2.c  -o ${OBJECTDIR}/uart2.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/uart2.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 else
 ${OBJECTDIR}/ADC.o: ADC.c  .generated_files/flags/default/dae55d67836db70dec6aa54c81e17f1f06bd69c5 .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
 	@${MKDIR} "${OBJECTDIR}" 
@@ -143,6 +149,12 @@ ${OBJECTDIR}/newmainXC16.o: newmainXC16.c  .generated_files/flags/default/4d4ce9
 	@${RM} ${OBJECTDIR}/newmainXC16.o.d 
 	@${RM} ${OBJECTDIR}/newmainXC16.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  newmainXC16.c  -o ${OBJECTDIR}/newmainXC16.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/newmainXC16.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/uart2.o: uart2.c  .generated_files/flags/default/672eeb9ac8e76220841acc39e012f877ac4c833c .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/uart2.o.d 
+	@${RM} ${OBJECTDIR}/uart2.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  uart2.c  -o ${OBJECTDIR}/uart2.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/uart2.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 endif
 

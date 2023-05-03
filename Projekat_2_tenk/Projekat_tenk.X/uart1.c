@@ -1,6 +1,8 @@
 #include <p30fxxxx.h>
 #include "uart1.h"
 
+// UART1 se u ovom projektu koristi za Bluetooth komunikaciju
+
 void initUART1(void)
 {
 	// U1BRG registar se koristi za odredjivanje baudrate-a pri serijskoj komunikaciji
@@ -43,7 +45,7 @@ void WriteUART1(unsigned int data)
 
 
 
-void RS232_putst(register const char *str)
+void print_BLE(register const char *str)
 {
 	while((*str) != 0)
 	{
