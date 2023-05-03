@@ -6,6 +6,7 @@
 // U PRVOJ FUNKCIJI PINOVI KOJE KORISTIMO
 // U POSLEDNJOJ FUNKCIJI ADCSSL I ADCON1bits.ASAM
 
+/*
 void ConfigureADCPins(void)
 {
 	//ADPCFGbits.PCFG6=0;
@@ -16,6 +17,7 @@ void ConfigureADCPins(void)
 	TRISBbits.TRISB8=1;
 	TRISBbits.TRISB9=1;
 }
+*/
 
 void ADCinit(void)
 {
@@ -118,7 +120,7 @@ void ADCinit(void)
 
 	ADCON2bits.VCFG=7;
 	ADCON2bits.CSCNA=1;
-	ADCON2bits.SMPI=3;
+	ADCON2bits.SMPI=2;
 	ADCON2bits.BUFM=0;
 	ADCON2bits.ALTS=0;
 
@@ -187,7 +189,7 @@ void ADCinit(void)
 		1 = Select ANx for input scan
 		0 = Skip ANx for input scan*/
 	//ADCSSL=0b0001111111111111;
-	ADCSSL=0b0000011110000000;
+	ADCSSL=0b0000011000000001;
 	ADCON1bits.ASAM = 1;
 
 	IFS0bits.ADIF=1;

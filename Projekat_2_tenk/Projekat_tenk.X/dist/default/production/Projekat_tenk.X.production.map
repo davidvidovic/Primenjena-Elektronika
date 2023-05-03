@@ -68,21 +68,21 @@ Default Scalar Model: Small
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x100               0x120           0x1b0  (432)
-.const                       0x220                0x1e            0x2d  (45)
-.text                        0x23e               0x2dc           0x44a  (1098)
-.dinit                       0x51a                 0x8             0xc  (12)
+.text                        0x100               0x15c           0x20a  (522)
+.const                       0x25c                0x1e            0x2d  (45)
+.text                        0x27a               0x2ae           0x405  (1029)
+.dinit                       0x528                 0x8             0xc  (12)
 
-                 Total "program" memory used (bytes):          0x633  (1587) 3%
+                 Total "program" memory used (bytes):          0x648  (1608) 3%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x800]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.nbss                        0x800                   0             0xe  (14)
+.nbss                        0x800                   0             0xc  (12)
 
-                 Total "data" memory used (bytes):            0xe  (14) <1%
+                 Total "data" memory used (bytes):            0xc  (12) <1%
 
 
 Dynamic Memory Usage
@@ -90,9 +90,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x80e                               0x7f2  (2034)
+stack                        0x80c                               0x7f4  (2036)
 
-                 Maximum dynamic memory (bytes):          0x7f2  (2034)
+                 Maximum dynamic memory (bytes):          0x7f4  (2036)
 
 Info: Project is using a large data memory model when small data memory model is sufficient.
 
@@ -101,65 +101,75 @@ External Symbols in Data Memory (by address):
 
                     0x0800                  _tempRX_BLE
                     0x0801                  _tempRX_DEBUG
-                    0x0802                  _broj1
-                    0x0804                  _broj2
-                    0x0806                  _rec
-                    0x080c                  _indeks
+                    0x0802                  _brojac_ms
+                    0x0804                  _brojac_us
+                    0x0806                  _vrednost_analogni_senzor
+                    0x0808                  _vrednost_Rsens1
+                    0x080a                  _vrednost_Rsens2
 
 External Symbols in Data Memory (by name):
 
-                    0x0802                  _broj1
-                    0x0804                  _broj2
-                    0x080c                  _indeks
-                    0x0806                  _rec
+                    0x0802                  _brojac_ms
+                    0x0804                  _brojac_us
                     0x0800                  _tempRX_BLE
                     0x0801                  _tempRX_DEBUG
+                    0x0808                  _vrednost_Rsens1
+                    0x080a                  _vrednost_Rsens2
+                    0x0806                  _vrednost_analogni_senzor
 
 External Symbols in Program Memory (by address):
 
                   0x000100                  __resetPRI
                   0x00013c                  __psv_init
-                  0x000152                  __data_init_standard
                   0x000152                  __data_init
+                  0x000152                  __data_init_standard
                   0x0001c8                  __U1RXInterrupt
                   0x0001e2                  __U2RXInterrupt
-                  0x00021a                  __DefaultInterrupt
-                  0x00023e                  _initUART1
-                  0x000258                  _WriteUART1
-                  0x000280                  _print_BLE
-                  0x0002b0                  _WriteUART1dec2string
-                  0x000332                  _initUART2
-                  0x00034a                  _WriteUART2
-                  0x000372                  _print_DEBUG
-                  0x0003a2                  _WriteUART2dec2string
-                  0x000424                  _ConfigureADCPins
-                  0x000432                  _ADCinit
-                  0x000496                  _main
-                  0x0004f2                  _Init_T1
-                  0x000508                  _Init_T2
+                  0x0001fc                  __T1Interrupt
+                  0x000218                  __T2Interrupt
+                  0x000234                  __ADCInterrupt
+                  0x000256                  __DefaultInterrupt
+                  0x00027a                  _initUART1
+                  0x000294                  _WriteUART1
+                  0x0002bc                  _print_BLE
+                  0x0002ec                  _WriteUART1dec2string
+                  0x00036e                  _initUART2
+                  0x000386                  _WriteUART2
+                  0x0003ae                  _print_DEBUG
+                  0x0003de                  _WriteUART2dec2string
+                  0x000460                  _ADCinit
+                  0x0004c4                  _Delay_us
+                  0x0004da                  _Delay_ms
+                  0x0004f0                  _main
+                  0x000500                  _Init_T1
+                  0x000516                  _Init_T2
 
 External Symbols in Program Memory (by name):
 
-                  0x000432                  _ADCinit
-                  0x000424                  _ConfigureADCPins
-                  0x0004f2                  _Init_T1
-                  0x000508                  _Init_T2
-                  0x000258                  _WriteUART1
-                  0x0002b0                  _WriteUART1dec2string
-                  0x00034a                  _WriteUART2
-                  0x0003a2                  _WriteUART2dec2string
-                  0x00021a                  __DefaultInterrupt
+                  0x000460                  _ADCinit
+                  0x0004da                  _Delay_ms
+                  0x0004c4                  _Delay_us
+                  0x000500                  _Init_T1
+                  0x000516                  _Init_T2
+                  0x000294                  _WriteUART1
+                  0x0002ec                  _WriteUART1dec2string
+                  0x000386                  _WriteUART2
+                  0x0003de                  _WriteUART2dec2string
+                  0x000234                  __ADCInterrupt
+                  0x000256                  __DefaultInterrupt
+                  0x0001fc                  __T1Interrupt
+                  0x000218                  __T2Interrupt
                   0x0001c8                  __U1RXInterrupt
                   0x0001e2                  __U2RXInterrupt
                   0x000152                  __data_init
                   0x000152                  __data_init_standard
                   0x00013c                  __psv_init
                   0x000100                  __resetPRI
-                  0x00023e                  _initUART1
-                  0x000332                  _initUART2
-                  0x000496                  _main
-                  0x000280                  _print_BLE
-                  0x000372                  _print_DEBUG
+                  0x00027a                  _initUART1
+                  0x00036e                  _initUART2
+                  0x0004f0                  _main
+                  0x0002bc                  _print_BLE
+                  0x0003ae                  _print_DEBUG
 
 Memory Configuration
 
@@ -220,7 +230,7 @@ LOAD c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000100        0x120
+.text             0x000100        0x15c
  *(.init)
  .init            0x000100         0x4c c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(crt0_standard.o)
                   0x000100                  __resetPRI
@@ -232,19 +242,22 @@ LOAD c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libfx-elf.a
  *(.user_init)
  *(.handle)
  *(.isr*)
- .isr.text        0x0001c8         0x52 build/default/production/newmainXC16.o
+ .isr.text        0x0001c8         0x8e build/default/production/newmainXC16.o
                   0x0001c8                  __U1RXInterrupt
                   0x0001e2                  __U2RXInterrupt
- .isr             0x00021a          0x4 default_isr
-                  0x00021a                  __DefaultInterrupt
+                  0x0001fc                  __T1Interrupt
+                  0x000218                  __T2Interrupt
+                  0x000234                  __ADCInterrupt
+ .isr             0x000256          0x4 default_isr
+                  0x000256                  __DefaultInterrupt
  *(.libc)
  *(.libm)
  *(.libdsp)
  *(.lib*)
  .libpic30_crt_start_mode
-                  0x00021e          0x2 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(crt_start_mode_normal.Meo)
-                  0x00021e                  __crt_start_mode
-                  0x00021e                  __crt_start_mode_normal
+                  0x00025a          0x2 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(crt_start_mode_normal.Meo)
+                  0x00025a                  __crt_start_mode
+                  0x00025a                  __crt_start_mode_normal
 
 usercode
  *(usercode)
@@ -293,46 +306,46 @@ userdata
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x26d1
+.debug_info       0x000000       0x28ed
  *(.debug_info)
- .debug_info      0x000000        0xd49 build/default/production/ADC.o
- .debug_info      0x000d49        0x72c build/default/production/timer.o
- .debug_info      0x001475        0x62b build/default/production/uart1.o
- .debug_info      0x001aa0        0x5c4 build/default/production/newmainXC16.o
- .debug_info      0x002064        0x66d build/default/production/uart2.o
+ .debug_info      0x000000        0xa78 build/default/production/ADC.o
+ .debug_info      0x000a78        0x72c build/default/production/timer.o
+ .debug_info      0x0011a4        0x62b build/default/production/uart1.o
+ .debug_info      0x0017cf        0xab1 build/default/production/newmainXC16.o
+ .debug_info      0x002280        0x66d build/default/production/uart2.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x48d
+.debug_abbrev     0x000000        0x4a9
  *(.debug_abbrev)
  .debug_abbrev    0x000000         0xc5 build/default/production/ADC.o
  .debug_abbrev    0x0000c5         0xc5 build/default/production/timer.o
  .debug_abbrev    0x00018a         0xe0 build/default/production/uart1.o
- .debug_abbrev    0x00026a        0x119 build/default/production/newmainXC16.o
- .debug_abbrev    0x000383        0x10a build/default/production/uart2.o
+ .debug_abbrev    0x00026a        0x135 build/default/production/newmainXC16.o
+ .debug_abbrev    0x00039f        0x10a build/default/production/uart2.o
 
-.debug_line       0x000000        0x596
+.debug_line       0x000000        0x5a2
  *(.debug_line)
- .debug_line      0x000000        0x120 build/default/production/ADC.o
- .debug_line      0x000120        0x10c build/default/production/timer.o
- .debug_line      0x00022c        0x11f build/default/production/uart1.o
- .debug_line      0x00034b        0x12b build/default/production/newmainXC16.o
- .debug_line      0x000476        0x120 build/default/production/uart2.o
+ .debug_line      0x000000        0x11a build/default/production/ADC.o
+ .debug_line      0x00011a        0x10c build/default/production/timer.o
+ .debug_line      0x000226        0x11f build/default/production/uart1.o
+ .debug_line      0x000345        0x13d build/default/production/newmainXC16.o
+ .debug_line      0x000482        0x120 build/default/production/uart2.o
 
-.debug_frame      0x000000        0x224
+.debug_frame      0x000000        0x2b2
  *(.debug_frame)
- .debug_frame     0x000000         0x48 build/default/production/ADC.o
- .debug_frame     0x000048         0x48 build/default/production/timer.o
- .debug_frame     0x000090         0x84 build/default/production/uart1.o
- .debug_frame     0x000114         0x8c build/default/production/newmainXC16.o
- .debug_frame     0x0001a0         0x84 build/default/production/uart2.o
+ .debug_frame     0x000000         0x2e build/default/production/ADC.o
+ .debug_frame     0x00002e         0x48 build/default/production/timer.o
+ .debug_frame     0x000076         0x84 build/default/production/uart1.o
+ .debug_frame     0x0000fa        0x134 build/default/production/newmainXC16.o
+ .debug_frame     0x00022e         0x84 build/default/production/uart2.o
 
-.debug_str        0x000000         0xde
+.debug_str        0x000000        0x135
  *(.debug_str)
- .debug_str       0x000000         0x52 build/default/production/ADC.o
- .debug_str       0x000052         0x26 build/default/production/timer.o
- .debug_str       0x000078         0x1e build/default/production/uart1.o
- .debug_str       0x000096         0x2a build/default/production/newmainXC16.o
- .debug_str       0x0000c0         0x1e build/default/production/uart2.o
+ .debug_str       0x000000         0x3d build/default/production/ADC.o
+ .debug_str       0x00003d         0x26 build/default/production/timer.o
+ .debug_str       0x000063         0x1e build/default/production/uart1.o
+ .debug_str       0x000081         0x96 build/default/production/newmainXC16.o
+ .debug_str       0x000117         0x1e build/default/production/uart2.o
 
 .debug_loc
  *(.debug_loc)
@@ -341,18 +354,18 @@ userdata
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x1a7
+                  0x000000        0x21a
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0x33 build/default/production/ADC.o
+                  0x000000         0x1e build/default/production/ADC.o
  .debug_pubnames
-                  0x000033         0x2a build/default/production/timer.o
+                  0x00001e         0x2a build/default/production/timer.o
  .debug_pubnames
-                  0x00005d         0x56 build/default/production/uart1.o
+                  0x000048         0x56 build/default/production/uart1.o
  .debug_pubnames
-                  0x0000b3         0x9c build/default/production/newmainXC16.o
+                  0x00009e        0x124 build/default/production/newmainXC16.o
  .debug_pubnames
-                  0x00014f         0x58 build/default/production/uart2.o
+                  0x0001c2         0x58 build/default/production/uart2.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -1072,43 +1085,44 @@ LOAD default_isr
 LOAD data_init
 
 .debug_pubtypes
-                  0x000078        0x303
+                  0x000078        0x322
  .debug_pubtypes
-                  0x000078        0x11b build/default/production/ADC.o
+                  0x000078         0xdb build/default/production/ADC.o
  .debug_pubtypes
-                  0x000193         0x97 build/default/production/timer.o
+                  0x000153         0x97 build/default/production/timer.o
  .debug_pubtypes
-                  0x00022a         0x7c build/default/production/uart1.o
+                  0x0001ea         0x7c build/default/production/uart1.o
  .debug_pubtypes
-                  0x0002a6         0x59 build/default/production/newmainXC16.o
+                  0x000266         0xb8 build/default/production/newmainXC16.o
  .debug_pubtypes
-                  0x0002ff         0x7c build/default/production/uart2.o
+                  0x00031e         0x7c build/default/production/uart2.o
 
 __c30_signature
-                  0x00037b         0x2a
+                  0x00039a         0x2a
  __c30_signature
-                  0x00037b          0x6 build/default/production/ADC.o
+                  0x00039a          0x6 build/default/production/ADC.o
  __c30_signature
-                  0x000381          0x6 build/default/production/timer.o
+                  0x0003a0          0x6 build/default/production/timer.o
  __c30_signature
-                  0x000387          0x6 build/default/production/uart1.o
+                  0x0003a6          0x6 build/default/production/uart1.o
  __c30_signature
-                  0x00038d          0x6 build/default/production/newmainXC16.o
+                  0x0003ac          0x6 build/default/production/newmainXC16.o
  __c30_signature
-                  0x000393          0x6 build/default/production/uart2.o
+                  0x0003b2          0x6 build/default/production/uart2.o
  __c30_signature
-                  0x000399          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(crt0_standard.o)
+                  0x0003b8          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x00039f          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(data_init_standard.o)
+                  0x0003be          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(data_init_standard.o)
 
-.nbss               0x0800          0xe
- .nbss              0x0800          0xe build/default/production/newmainXC16.o
+.nbss               0x0800          0xc
+ .nbss              0x0800          0xc build/default/production/newmainXC16.o
                     0x0800                  _tempRX_BLE
                     0x0801                  _tempRX_DEBUG
-                    0x0802                  _broj1
-                    0x0804                  _broj2
-                    0x0806                  _rec
-                    0x080c                  _indeks
+                    0x0802                  _brojac_ms
+                    0x0804                  _brojac_us
+                    0x0806                  _vrednost_analogni_senzor
+                    0x0808                  _vrednost_Rsens1
+                    0x080a                  _vrednost_Rsens2
 
 .ivt._U1RXInterrupt
                   0x000026          0x2
@@ -1120,28 +1134,44 @@ __c30_signature
  .ivt._U2RXInterrupt
                   0x000044          0x2 build/default/production/newmainXC16.o
 
-.const              0x8220         0x1e load address 0x000220  
- .const             0x8220         0x1e build/default/production/newmainXC16.o
+.ivt._T1Interrupt
+                  0x00001a          0x2
+ .ivt._T1Interrupt
+                  0x00001a          0x2 build/default/production/newmainXC16.o
 
-.text             0x00023e        0x2dc
- .text            0x00023e         0xf4 build/default/production/uart1.o
-                  0x00023e                  _initUART1
-                  0x000258                  _WriteUART1
-                  0x000280                  _print_BLE
-                  0x0002b0                  _WriteUART1dec2string
- .text            0x000332         0xf2 build/default/production/uart2.o
-                  0x000332                  _initUART2
-                  0x00034a                  _WriteUART2
-                  0x000372                  _print_DEBUG
-                  0x0003a2                  _WriteUART2dec2string
- .text            0x000424         0x72 build/default/production/ADC.o
-                  0x000424                  _ConfigureADCPins
-                  0x000432                  _ADCinit
- .text            0x000496         0x5c build/default/production/newmainXC16.o
-                  0x000496                  _main
- .text            0x0004f2         0x28 build/default/production/timer.o
-                  0x0004f2                  _Init_T1
-                  0x000508                  _Init_T2
+.ivt._T2Interrupt
+                  0x000020          0x2
+ .ivt._T2Interrupt
+                  0x000020          0x2 build/default/production/newmainXC16.o
 
-.dinit            0x00051a          0x8
- .dinit           0x00051a          0x8 data_init
+.ivt._ADCInterrupt
+                  0x00002a          0x2
+ .ivt._ADCInterrupt
+                  0x00002a          0x2 build/default/production/newmainXC16.o
+
+.const              0x825c         0x1e load address 0x00025c  
+ .const             0x825c         0x1e build/default/production/newmainXC16.o
+
+.text             0x00027a        0x2ae
+ .text            0x00027a         0xf4 build/default/production/uart1.o
+                  0x00027a                  _initUART1
+                  0x000294                  _WriteUART1
+                  0x0002bc                  _print_BLE
+                  0x0002ec                  _WriteUART1dec2string
+ .text            0x00036e         0xf2 build/default/production/uart2.o
+                  0x00036e                  _initUART2
+                  0x000386                  _WriteUART2
+                  0x0003ae                  _print_DEBUG
+                  0x0003de                  _WriteUART2dec2string
+ .text            0x000460         0x64 build/default/production/ADC.o
+                  0x000460                  _ADCinit
+ .text            0x0004c4         0x3c build/default/production/newmainXC16.o
+                  0x0004c4                  _Delay_us
+                  0x0004da                  _Delay_ms
+                  0x0004f0                  _main
+ .text            0x000500         0x28 build/default/production/timer.o
+                  0x000500                  _Init_T1
+                  0x000516                  _Init_T2
+
+.dinit            0x000528          0x8
+ .dinit           0x000528          0x8 data_init

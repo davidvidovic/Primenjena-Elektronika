@@ -1,6 +1,6 @@
 #include<p30fxxxx.h>
 
-void ConfigureADCPins(void);
+//void ConfigureADCPins(void);
 
 void ADCinit_analog(void);
 
@@ -11,7 +11,7 @@ void ADCinit(void);
 
 // U MAIN FUNKCIJI NAM TREBA U SETUP DIJELU:
 
-// DCON1bits.ADON = 1;
+// ADCON1bits.ADON = 1;
 
 // OZNACAVA POCETAK AD KONVERZIJE
 
