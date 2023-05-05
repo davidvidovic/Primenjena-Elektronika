@@ -1,7 +1,7 @@
 #include <p30fxxxx.h>
 //#define UART1_H
 
-// UART1 se u ovom projektu koristi za Bluetooth komunikaciju
+// UART1 se u ovom projektu koristi za Debugging
 
 // Funkcija za inicijalizaciju UART1
 void initUART1(void);
@@ -10,7 +10,7 @@ void initUART1(void);
 void WriteUART1(unsigned int data);
 
 // Funkcija za slanje stringa preko UART1
-void print_BLE(register const char *str);
+void print_DEBUG(register const char *str);
 
 // Funkcija za slanje 4-cifrenog broja preko UART1
 void WriteUART1dec2string(unsigned int data);

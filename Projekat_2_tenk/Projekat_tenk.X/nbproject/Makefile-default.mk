@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=ADC.c timer.c uart1.c newmainXC16.c uart2.c
+SOURCEFILES_QUOTED_IF_SPACED=ADC.c timer.c uart1.c uart2.c pins.c newmainXC16.c hc-sr04.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ADC.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/uart1.o ${OBJECTDIR}/newmainXC16.o ${OBJECTDIR}/uart2.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/ADC.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/uart1.o.d ${OBJECTDIR}/newmainXC16.o.d ${OBJECTDIR}/uart2.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ADC.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/uart1.o ${OBJECTDIR}/uart2.o ${OBJECTDIR}/pins.o ${OBJECTDIR}/newmainXC16.o ${OBJECTDIR}/hc-sr04.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/ADC.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/uart1.o.d ${OBJECTDIR}/uart2.o.d ${OBJECTDIR}/pins.o.d ${OBJECTDIR}/newmainXC16.o.d ${OBJECTDIR}/hc-sr04.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/ADC.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/uart1.o ${OBJECTDIR}/newmainXC16.o ${OBJECTDIR}/uart2.o
+OBJECTFILES=${OBJECTDIR}/ADC.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/uart1.o ${OBJECTDIR}/uart2.o ${OBJECTDIR}/pins.o ${OBJECTDIR}/newmainXC16.o ${OBJECTDIR}/hc-sr04.o
 
 # Source Files
-SOURCEFILES=ADC.c timer.c uart1.c newmainXC16.c uart2.c
+SOURCEFILES=ADC.c timer.c uart1.c uart2.c pins.c newmainXC16.c hc-sr04.c
 
 
 
@@ -113,17 +113,29 @@ ${OBJECTDIR}/uart1.o: uart1.c  .generated_files/flags/default/78fe5293b0b992fdac
 	@${RM} ${OBJECTDIR}/uart1.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  uart1.c  -o ${OBJECTDIR}/uart1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/uart1.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
+${OBJECTDIR}/uart2.o: uart2.c  .generated_files/flags/default/4ba2a3760816841b7cebbf5a6eb8301ef9f40cf .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/uart2.o.d 
+	@${RM} ${OBJECTDIR}/uart2.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  uart2.c  -o ${OBJECTDIR}/uart2.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/uart2.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/pins.o: pins.c  .generated_files/flags/default/81d6e2ae1e2a102edd13c754529717143f78aa26 .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/pins.o.d 
+	@${RM} ${OBJECTDIR}/pins.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  pins.c  -o ${OBJECTDIR}/pins.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/pins.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 ${OBJECTDIR}/newmainXC16.o: newmainXC16.c  .generated_files/flags/default/80a83e3cdd9d1b96f2fee2c6e3434fc1238895e9 .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/newmainXC16.o.d 
 	@${RM} ${OBJECTDIR}/newmainXC16.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  newmainXC16.c  -o ${OBJECTDIR}/newmainXC16.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/newmainXC16.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/uart2.o: uart2.c  .generated_files/flags/default/4ba2a3760816841b7cebbf5a6eb8301ef9f40cf .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
+${OBJECTDIR}/hc-sr04.o: hc-sr04.c  .generated_files/flags/default/466e705c4cd571778eaaa60a16e10c440db2fa29 .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/uart2.o.d 
-	@${RM} ${OBJECTDIR}/uart2.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  uart2.c  -o ${OBJECTDIR}/uart2.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/uart2.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	@${RM} ${OBJECTDIR}/hc-sr04.o.d 
+	@${RM} ${OBJECTDIR}/hc-sr04.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  hc-sr04.c  -o ${OBJECTDIR}/hc-sr04.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/hc-sr04.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 else
 ${OBJECTDIR}/ADC.o: ADC.c  .generated_files/flags/default/dae55d67836db70dec6aa54c81e17f1f06bd69c5 .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
@@ -144,17 +156,29 @@ ${OBJECTDIR}/uart1.o: uart1.c  .generated_files/flags/default/c71de7e96622c14d60
 	@${RM} ${OBJECTDIR}/uart1.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  uart1.c  -o ${OBJECTDIR}/uart1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/uart1.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
+${OBJECTDIR}/uart2.o: uart2.c  .generated_files/flags/default/672eeb9ac8e76220841acc39e012f877ac4c833c .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/uart2.o.d 
+	@${RM} ${OBJECTDIR}/uart2.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  uart2.c  -o ${OBJECTDIR}/uart2.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/uart2.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/pins.o: pins.c  .generated_files/flags/default/edfc728894ad776f42152bef5ba1fcdd807189c1 .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/pins.o.d 
+	@${RM} ${OBJECTDIR}/pins.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  pins.c  -o ${OBJECTDIR}/pins.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/pins.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 ${OBJECTDIR}/newmainXC16.o: newmainXC16.c  .generated_files/flags/default/4d4ce97d3a092c92599526fbab084642a9bc2517 .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/newmainXC16.o.d 
 	@${RM} ${OBJECTDIR}/newmainXC16.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  newmainXC16.c  -o ${OBJECTDIR}/newmainXC16.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/newmainXC16.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/uart2.o: uart2.c  .generated_files/flags/default/672eeb9ac8e76220841acc39e012f877ac4c833c .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
+${OBJECTDIR}/hc-sr04.o: hc-sr04.c  .generated_files/flags/default/7a6b2eb30e630fcc8e65b9a778a6d2b1cd09e69c .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/uart2.o.d 
-	@${RM} ${OBJECTDIR}/uart2.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  uart2.c  -o ${OBJECTDIR}/uart2.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/uart2.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	@${RM} ${OBJECTDIR}/hc-sr04.o.d 
+	@${RM} ${OBJECTDIR}/hc-sr04.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  hc-sr04.c  -o ${OBJECTDIR}/hc-sr04.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/hc-sr04.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 endif
 
