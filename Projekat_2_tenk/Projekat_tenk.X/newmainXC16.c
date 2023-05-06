@@ -9,8 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <p30fxxxx.h>
-#include "uart1.h"
-#include "uart2.h"
+#include "uart.h"
 #include "ADC.h"
 #include "timer.h"
 #include "pins.h"
@@ -39,7 +38,7 @@ char rec[10];
 int indeks = 0;
 
 // -----------------------------------
-// POMOCNE FUNKCIJE
+// DELAY FUNKCIJE
 
 
 void Delay_us(int pauza)
@@ -135,6 +134,7 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _T3Interrupt(void)
 {
     IFS0bits.T3IF = 0;
     overflow_flag_desno = 1;
+    PORTDbits.RD8 = 0;
 } 
 
 
@@ -143,14 +143,15 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _T4Interrupt(void)
 {
     IFS1bits.T4IF = 0;
     overflow_flag_levo = 1;
+    PORTDbits.RD9 = 0;
 } 
 
 
 // Prekidna rutina za AD konverziju
 void __attribute__((__interrupt__, no_auto_psv)) _ADCInterrupt(void) 
 {
-	vrednost_analogni_senzor = ADCBUF0;
-	vrednost_Rsens1 = ADCBUF1;
+    vrednost_analogni_senzor = ADCBUF0;
+    vrednost_Rsens1 = ADCBUF1;
     vrednost_Rsens2 = ADCBUF2;
     
     // Gasimo AD konverziju
@@ -294,8 +295,8 @@ void meriLevo()
 
 int main(void) {
     // Inicijalizacija modula
-    initUART1();
-    initUART2();
+    InitUART1();
+    InitUART2();
     Init_T1();
     Init_T2();
     Init_T3();
