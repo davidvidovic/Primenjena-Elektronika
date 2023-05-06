@@ -98,11 +98,11 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x100               0x818           0xc24  (3108)
-.const                       0x918                0x3c            0x5a  (90)
-.text                        0x954               0x370           0x528  (1320)
-.dinit                       0xcc4                 0xe            0x15  (21)
+.const                       0x918                0x46            0x69  (105)
+.text                        0x95e               0x396           0x561  (1377)
+.dinit                       0xcf4                 0xe            0x15  (21)
 
-                 Total "program" memory used (bytes):         0x11bb  (4539) 9%
+                 Total "program" memory used (bytes):         0x1203  (4611) 9%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x800]
@@ -162,8 +162,8 @@ External Symbols in Program Memory (by address):
 
                   0x000100                  __resetPRI
                   0x00013c                  __psv_init
-                  0x000152                  __data_init
                   0x000152                  __data_init_standard
+                  0x000152                  __data_init
                   0x0001c8                  __U1RXInterrupt
                   0x0001da                  __U2RXInterrupt
                   0x000210                  __T1Interrupt
@@ -180,8 +180,8 @@ External Symbols in Program Memory (by address):
                   0x0003a0                  ___divsf3x
                   0x0003a0                  ___divsf3
                   0x000532                  __sdivf
-                  0x00055e                  ___mulsf3
                   0x00055e                  ___mulsf3x
+                  0x00055e                  ___mulsf3
                   0x00066a                  __dnrmpackf
                   0x0006be                  __unpackdnrmf
                   0x00071c                  __typef
@@ -190,44 +190,45 @@ External Symbols in Program Memory (by address):
                   0x000808                  __unpackf
                   0x00086e                  ___floatundisf
                   0x0008cc                  __fpack
-                  0x000954                  _InitUART1
-                  0x00096e                  _WriteUART1
-                  0x000996                  _print_DEBUG
-                  0x0009c6                  _WriteUART1dec2string
-                  0x000a48                  _InitUART2
-                  0x000a60                  _WriteUART2
-                  0x000a88                  _print_BLE
-                  0x000aa4                  _WriteUART2dec2string
-                  0x000b4c                  _Delay_us
-                  0x000b62                  _Delay_ms
-                  0x000b78                  _meriDesno
-                  0x000b86                  _meriLevo
-                  0x000b94                  _main
-                  0x000bce                  _ADCinit
-                  0x000c32                  _Init_T1
-                  0x000c48                  _Init_T2
-                  0x000c5a                  _Init_T3
-                  0x000c70                  _Init_T4
-                  0x000c86                  _InitPins
-                  0x000cb2                  _InitInterrupts
+                  0x00095e                  _InitUART1
+                  0x000978                  _WriteUART1
+                  0x0009a0                  _print_DEBUG
+                  0x0009d0                  _WriteUART1dec2string
+                  0x000a52                  _InitUART2
+                  0x000a6a                  _WriteUART2
+                  0x000a92                  _print_BLE
+                  0x000aae                  _WriteUART2dec2string
+                  0x000b56                  _Delay_us
+                  0x000b6c                  _Delay_ms
+                  0x000b82                  _meriDesno
+                  0x000b90                  _meriLevo
+                  0x000b9e                  _meriIspred
+                  0x000bac                  _main
+                  0x000bfc                  _ADCinit
+                  0x000c62                  _Init_T1
+                  0x000c78                  _Init_T2
+                  0x000c8a                  _Init_T3
+                  0x000ca0                  _Init_T4
+                  0x000cb6                  _InitPins
+                  0x000ce2                  _InitInterrupts
 
 External Symbols in Program Memory (by name):
 
-                  0x000bce                  _ADCinit
-                  0x000b62                  _Delay_ms
-                  0x000b4c                  _Delay_us
-                  0x000cb2                  _InitInterrupts
-                  0x000c86                  _InitPins
-                  0x000954                  _InitUART1
-                  0x000a48                  _InitUART2
-                  0x000c32                  _Init_T1
-                  0x000c48                  _Init_T2
-                  0x000c5a                  _Init_T3
-                  0x000c70                  _Init_T4
-                  0x00096e                  _WriteUART1
-                  0x0009c6                  _WriteUART1dec2string
-                  0x000a60                  _WriteUART2
-                  0x000aa4                  _WriteUART2dec2string
+                  0x000bfc                  _ADCinit
+                  0x000b6c                  _Delay_ms
+                  0x000b56                  _Delay_us
+                  0x000ce2                  _InitInterrupts
+                  0x000cb6                  _InitPins
+                  0x00095e                  _InitUART1
+                  0x000a52                  _InitUART2
+                  0x000c62                  _Init_T1
+                  0x000c78                  _Init_T2
+                  0x000c8a                  _Init_T3
+                  0x000ca0                  _Init_T4
+                  0x000978                  _WriteUART1
+                  0x0009d0                  _WriteUART1dec2string
+                  0x000a6a                  _WriteUART2
+                  0x000aae                  _WriteUART2dec2string
                   0x00025c                  __ADCInterrupt
                   0x00032a                  __DefaultInterrupt
                   0x0002d0                  __INT1Interrupt
@@ -258,11 +259,12 @@ External Symbols in Program Memory (by name):
                   0x00071c                  __typef
                   0x0006be                  __unpackdnrmf
                   0x000808                  __unpackf
-                  0x000b94                  _main
-                  0x000b78                  _meriDesno
-                  0x000b86                  _meriLevo
-                  0x000a88                  _print_BLE
-                  0x000996                  _print_DEBUG
+                  0x000bac                  _main
+                  0x000b82                  _meriDesno
+                  0x000b9e                  _meriIspred
+                  0x000b90                  _meriLevo
+                  0x000a92                  _print_BLE
+                  0x0009a0                  _print_DEBUG
 
 Memory Configuration
 
@@ -435,27 +437,27 @@ userdata
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x45e5
+.debug_info       0x000000       0x4621
  *(.debug_info)
- .debug_info      0x000000        0xa78 build/default/production/ADC.o
- .debug_info      0x000a78        0xc02 build/default/production/timer.o
- .debug_info      0x00167a        0x611 build/default/production/pins.o
- .debug_info      0x001c8b       0x1204 build/default/production/newmainXC16.o
- .debug_info      0x002e8f        0x463 build/default/production/hc-sr04.o
- .debug_info      0x0032f2        0xb3a build/default/production/uart.o
- .debug_info      0x003e2c         0x8d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
- .debug_info      0x003eb9         0x91 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.XX_o)
- .debug_info      0x003f4a         0x8d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
- .debug_info      0x003fd7         0x9d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.XX_o)
- .debug_info      0x004074         0x9d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
- .debug_info      0x004111         0xa0 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
- .debug_info      0x0041b1         0xa2 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
- .debug_info      0x004253         0x9c c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
- .debug_info      0x0042ef         0x9f c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
- .debug_info      0x00438e         0x9d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.XX_o)
- .debug_info      0x00442b         0x9e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.XX_o)
- .debug_info      0x0044c9         0x91 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
- .debug_info      0x00455a         0x8b c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
+ .debug_info      0x000000        0xa9a build/default/production/ADC.o
+ .debug_info      0x000a9a        0xc02 build/default/production/timer.o
+ .debug_info      0x00169c        0x611 build/default/production/pins.o
+ .debug_info      0x001cad       0x121e build/default/production/newmainXC16.o
+ .debug_info      0x002ecb        0x463 build/default/production/hc-sr04.o
+ .debug_info      0x00332e        0xb3a build/default/production/uart.o
+ .debug_info      0x003e68         0x8d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
+ .debug_info      0x003ef5         0x91 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.XX_o)
+ .debug_info      0x003f86         0x8d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+ .debug_info      0x004013         0x9d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.XX_o)
+ .debug_info      0x0040b0         0x9d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
+ .debug_info      0x00414d         0xa0 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
+ .debug_info      0x0041ed         0xa2 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
+ .debug_info      0x00428f         0x9c c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
+ .debug_info      0x00432b         0x9f c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
+ .debug_info      0x0043ca         0x9d c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.XX_o)
+ .debug_info      0x004467         0x9e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.XX_o)
+ .debug_info      0x004505         0x91 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
+ .debug_info      0x004596         0x8b c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0x64e
@@ -480,37 +482,37 @@ userdata
  .debug_abbrev    0x000626         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
  .debug_abbrev    0x00063a         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
 
-.debug_line       0x000000        0xd75
+.debug_line       0x000000        0xd81
  *(.debug_line)
- .debug_line      0x000000        0x11a build/default/production/ADC.o
- .debug_line      0x00011a        0x11e build/default/production/timer.o
- .debug_line      0x000238        0x10e build/default/production/pins.o
- .debug_line      0x000346        0x18f build/default/production/newmainXC16.o
- .debug_line      0x0004d5        0x104 build/default/production/hc-sr04.o
- .debug_line      0x0005d9        0x145 build/default/production/uart.o
- .debug_line      0x00071e         0x56 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
- .debug_line      0x000774         0x3b c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.XX_o)
- .debug_line      0x0007af         0x4a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
- .debug_line      0x0007f9        0x124 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.XX_o)
- .debug_line      0x00091d         0xcc c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
- .debug_line      0x0009e9         0x72 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
- .debug_line      0x000a5b         0x7a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
- .debug_line      0x000ad5         0x5e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
- .debug_line      0x000b33         0x51 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
- .debug_line      0x000b84         0x98 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.XX_o)
- .debug_line      0x000c1c         0x79 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.XX_o)
- .debug_line      0x000c95         0x1a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(errno.XX_o)
- .debug_line      0x000caf         0x6c c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
- .debug_line      0x000d1b         0x5a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
+ .debug_line      0x000000        0x11b build/default/production/ADC.o
+ .debug_line      0x00011b        0x11e build/default/production/timer.o
+ .debug_line      0x000239        0x10e build/default/production/pins.o
+ .debug_line      0x000347        0x19a build/default/production/newmainXC16.o
+ .debug_line      0x0004e1        0x104 build/default/production/hc-sr04.o
+ .debug_line      0x0005e5        0x145 build/default/production/uart.o
+ .debug_line      0x00072a         0x56 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
+ .debug_line      0x000780         0x3b c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.XX_o)
+ .debug_line      0x0007bb         0x4a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+ .debug_line      0x000805        0x124 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.XX_o)
+ .debug_line      0x000929         0xcc c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
+ .debug_line      0x0009f5         0x72 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
+ .debug_line      0x000a67         0x7a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
+ .debug_line      0x000ae1         0x5e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
+ .debug_line      0x000b3f         0x51 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
+ .debug_line      0x000b90         0x98 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.XX_o)
+ .debug_line      0x000c28         0x79 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.XX_o)
+ .debug_line      0x000ca1         0x1a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(errno.XX_o)
+ .debug_line      0x000cbb         0x6c c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
+ .debug_line      0x000d27         0x5a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
 
-.debug_frame      0x000000        0x422
+.debug_frame      0x000000        0x43c
  *(.debug_frame)
  .debug_frame     0x000000         0x2e build/default/production/ADC.o
  .debug_frame     0x00002e         0x7c build/default/production/timer.o
  .debug_frame     0x0000aa         0x2e build/default/production/pins.o
- .debug_frame     0x0000d8        0x228 build/default/production/newmainXC16.o
- .debug_frame     0x000300         0x2e build/default/production/hc-sr04.o
- .debug_frame     0x00032e         0xf4 build/default/production/uart.o
+ .debug_frame     0x0000d8        0x242 build/default/production/newmainXC16.o
+ .debug_frame     0x00031a         0x2e build/default/production/hc-sr04.o
+ .debug_frame     0x000348         0xf4 build/default/production/uart.o
 
 .debug_str        0x000000        0x26b
  *(.debug_str)
@@ -528,7 +530,7 @@ userdata
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x32c
+                  0x000000        0x33b
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x1e build/default/production/ADC.o
@@ -537,11 +539,11 @@ userdata
  .debug_pubnames
                   0x000060         0x1f build/default/production/pins.o
  .debug_pubnames
-                  0x00007f        0x1ec build/default/production/newmainXC16.o
+                  0x00007f        0x1fb build/default/production/newmainXC16.o
  .debug_pubnames
-                  0x00026b         0x25 build/default/production/hc-sr04.o
+                  0x00027a         0x25 build/default/production/hc-sr04.o
  .debug_pubnames
-                  0x000290         0x9c build/default/production/uart.o
+                  0x00029f         0x9c build/default/production/uart.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -1397,36 +1399,37 @@ __c30_signature
  .ivt._INT1Interrupt
                   0x000034          0x2 build/default/production/newmainXC16.o
 
-.const              0x8918         0x3c load address 0x000918  
- .const             0x8918         0x3c build/default/production/newmainXC16.o
+.const              0x8918         0x46 load address 0x000918  
+ .const             0x8918         0x46 build/default/production/newmainXC16.o
 
-.text             0x000954        0x370
- .text            0x000954        0x1f8 build/default/production/uart.o
-                  0x000954                  _InitUART1
-                  0x00096e                  _WriteUART1
-                  0x000996                  _print_DEBUG
-                  0x0009c6                  _WriteUART1dec2string
-                  0x000a48                  _InitUART2
-                  0x000a60                  _WriteUART2
-                  0x000a88                  _print_BLE
-                  0x000aa4                  _WriteUART2dec2string
- .text            0x000b4c         0x82 build/default/production/newmainXC16.o
-                  0x000b4c                  _Delay_us
-                  0x000b62                  _Delay_ms
-                  0x000b78                  _meriDesno
-                  0x000b86                  _meriLevo
-                  0x000b94                  _main
- .text            0x000bce         0x64 build/default/production/ADC.o
-                  0x000bce                  _ADCinit
- .text            0x000c32         0x54 build/default/production/timer.o
-                  0x000c32                  _Init_T1
-                  0x000c48                  _Init_T2
-                  0x000c5a                  _Init_T3
-                  0x000c70                  _Init_T4
- .text            0x000c86         0x2c build/default/production/pins.o
-                  0x000c86                  _InitPins
- .text            0x000cb2         0x12 build/default/production/hc-sr04.o
-                  0x000cb2                  _InitInterrupts
+.text             0x00095e        0x396
+ .text            0x00095e        0x1f8 build/default/production/uart.o
+                  0x00095e                  _InitUART1
+                  0x000978                  _WriteUART1
+                  0x0009a0                  _print_DEBUG
+                  0x0009d0                  _WriteUART1dec2string
+                  0x000a52                  _InitUART2
+                  0x000a6a                  _WriteUART2
+                  0x000a92                  _print_BLE
+                  0x000aae                  _WriteUART2dec2string
+ .text            0x000b56         0xa6 build/default/production/newmainXC16.o
+                  0x000b56                  _Delay_us
+                  0x000b6c                  _Delay_ms
+                  0x000b82                  _meriDesno
+                  0x000b90                  _meriLevo
+                  0x000b9e                  _meriIspred
+                  0x000bac                  _main
+ .text            0x000bfc         0x66 build/default/production/ADC.o
+                  0x000bfc                  _ADCinit
+ .text            0x000c62         0x54 build/default/production/timer.o
+                  0x000c62                  _Init_T1
+                  0x000c78                  _Init_T2
+                  0x000c8a                  _Init_T3
+                  0x000ca0                  _Init_T4
+ .text            0x000cb6         0x2c build/default/production/pins.o
+                  0x000cb6                  _InitPins
+ .text            0x000ce2         0x12 build/default/production/hc-sr04.o
+                  0x000ce2                  _InitInterrupts
 
-.dinit            0x000cc4          0xe
- .dinit           0x000cc4          0xe data_init
+.dinit            0x000cf4          0xe
+ .dinit           0x000cf4          0xe data_init

@@ -292,6 +292,14 @@ void meriLevo()
     LATDbits.LATD3 = 0;
 }
 
+// Oko 1100 vrednosti analognog senzora je prepreka na 10cm udaljenosti
+void meriIspred()
+{
+    ADCON1bits.ADON = 1;
+    Delay_ms(10);
+    ADCON1bits.ADON = 0;
+}
+
 
 int main(void) {
     // Inicijalizacija modula
@@ -303,6 +311,9 @@ int main(void) {
     Init_T4();
     InitPins();
     InitInterrupts();
+    ADCinit();
+    
+    ADCON1bits.ADON = 0;
     
     overflow_flag_desno = 0;
     overflow_flag_levo = 0;
@@ -317,6 +328,7 @@ int main(void) {
     {
         meriDesno();
         meriLevo();
+        meriIspred();
         
         Delay_ms(1000);
         
@@ -324,6 +336,12 @@ int main(void) {
         WriteUART2dec2string(distancaDesno);
         print_BLE("\nLevo: ");
         WriteUART2dec2string(distancaLevo);
+        
+        if(vrednost_analogni_senzor > 1100) 
+        {
+            print_BLE("\nIspred: ");
+            WriteUART2dec2string(vrednost_analogni_senzor);
+        }
         print_BLE("\n-----\n\n");
         
     }

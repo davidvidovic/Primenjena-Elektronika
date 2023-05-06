@@ -180,7 +180,7 @@ void ADCinit(void)
 		1 = Analog input pin in Digital mode, port read input enabled, A/D input multiplexer input connected to AVSS
 		0 = Analog input pin in Analog mode, port read input disabled, A/D samples pin voltage*/
 
-	// ADPCFG=0; 
+	ADPCFG=0; 
 
 
 	/*ADCSSL: A/D Input Scan Select Register
