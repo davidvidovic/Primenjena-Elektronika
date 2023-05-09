@@ -9,11 +9,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <p30fxxxx.h>
+#include "outcompare.h"
+
 #include "uart.h"
 #include "ADC.h"
 #include "timer.h"
 #include "pins.h"
 #include "hc-sr04.h"
+#include "timer2.h"
+#include <stdbool.h> 
+#include <stdlib.h>
+#include <stdio.h>
+
 
 _FOSC(CSW_FSCM_OFF & XT_PLL4); // takt 10MHz
 _FWDT(WDT_OFF); // Watch Dog Timer - OFF
@@ -37,6 +44,7 @@ int distancaLevo;
 char rec[10];
 int indeks = 0;
 
+
 // -----------------------------------
 // DELAY FUNKCIJE
 
@@ -55,11 +63,11 @@ void Delay_us(int pauza)
 void Delay_ms(int pauza)
 {
     brojac_ms = 0;
-    T2CONbits.TON = 1; // T2 on
+    T5CONbits.TON = 1; // T5 on
     
     while(brojac_ms < pauza);
     
-    T2CONbits.TON = 0; // T2 off
+    T5CONbits.TON = 0; // T5 off
 }
 
 // -----------------------------------
@@ -120,14 +128,13 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _T1Interrupt(void)
 	IFS0bits.T1IF = 0;    
 }
 
-
-// Prekidna rutina za TIMER2 koji broji milisekunde (ms)
-void __attribute__ ((__interrupt__, no_auto_psv)) _T2Interrupt(void)
+// Prekidna rutina za TIMER2 koji se koristi za PWM
+void __attribute__((__interrupt__)) _T2Interrupt(void) // pwm
 {
-	TMR2 = 0;   
-	brojac_ms++;
-	IFS0bits.T2IF = 0;    
-} 
+    TMR2 = 0;
+    IFS0bits.T2IF = 0;
+}
+
 
 // Prekidna rutina za TIMER3
 void __attribute__ ((__interrupt__, no_auto_psv)) _T3Interrupt(void)
@@ -144,6 +151,15 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _T4Interrupt(void)
     IFS1bits.T4IF = 0;
     overflow_flag_levo = 1;
     PORTDbits.RD9 = 0;
+} 
+
+
+// Prekidna rutina za TIMER5 koji broji milisekunde (ms)
+void __attribute__ ((__interrupt__, no_auto_psv)) _T5Interrupt(void)
+{
+	TMR5 = 0;   
+	brojac_ms++;
+	IFS1bits.T5IF = 0;    
 } 
 
 
@@ -301,6 +317,81 @@ void meriIspred()
 }
 
 
+
+void PWM1()
+{
+//    PR2 = 500;//odredjuje frekvenciju po formuli
+//    OC1RS = dutyC;//postavimo pwm
+//    OC1R = 1000;//inicijalni pwm pri paljenju samo
+//    OC1CON  = OC_IDLE_CON & OC_TIMER2_SRC & OC_PWM_FAULT_PIN_DISABLE& T2_PS_1_256;//konfiguracija pwma
+//                   
+//    T2CONbits.TON = 1;//ukljucujemo timer koji koristi
+    //PR2=50;
+    //OC1RS= 1;
+    OC1R =10;
+    OC1CONbits.OCM = 0b110;
+    T2CONbits.TCKPS = 0b00;
+
+    T2CONbits.TON=1;
+}
+
+void PWM2()
+{
+    //PR2=10;
+    //OC2RS= 1;
+    OC2R = 1000;
+    OC2CONbits.OCM = 0b110;
+    T2CONbits.TCKPS = 0b00;
+
+    T2CONbits.TON=1;
+}
+
+void voziNapred()
+{
+    LATFbits.LATF1 = 1;
+    LATBbits.LATB1 = 0;
+    PWM1();
+
+    LATBbits.LATB12 = 1;
+    LATFbits.LATF0 = 0;
+    PWM2();
+}
+
+void voziNazad()
+{
+    LATFbits.LATF1 = 1;
+    LATBbits.LATB1 = 0;
+    PWM1(400);
+
+    LATBbits.LATB12 = 1;
+    LATFbits.LATF0 = 0;
+    PWM2(400);
+}
+
+void skrenLevo()
+{
+    LATFbits.LATF1 = 1;
+    LATBbits.LATB1 = 1;
+    PWM1(400);
+
+    LATBbits.LATB12 = 1;
+    LATFbits.LATF0 = 1;
+    PWM2(400);    
+}
+
+void skreniDesno()
+{
+    LATFbits.LATF1 = 1;
+    LATBbits.LATB1 = 1;
+    PWM1(400);
+
+    LATBbits.LATB12 = 1;
+    LATFbits.LATF0 = 1;
+    PWM2(400);    
+}
+
+
+
 int main(void) {
     // Inicijalizacija modula
     InitUART1();
@@ -309,6 +400,7 @@ int main(void) {
     Init_T2();
     Init_T3();
     Init_T4();
+    Init_T5();
     InitPins();
     InitInterrupts();
     ADCinit();
@@ -322,28 +414,36 @@ int main(void) {
     print_BLE("Inicijalizacija zavrsena!");
     
     indeks = 0;
+    //PWM2();
+   // PWM1();
+    
     
     // Glavna - super petlja
     while(1)
     {
-        meriDesno();
-        meriLevo();
-        meriIspred();
+        //meriDesno();
+        //meriLevo();
+        //meriIspred();
+        voziNapred();
+//        LATFbits.LATF1 = 1;
+//        LATBbits.LATB1 = 0;
+//        
+//        LATBbits.LATB12 = 1;
+//        LATFbits.LATF0 = 0;
+//
+//
+//        LATBbits.LATB12 = 1;
+//        LATFbits.LATF0 = 0;
+//    
+//        LATDbits.LATD0 = 1;
+//        LATDbits.LATD1 = 1;
+//        Delay_us(90);
+//        LATDbits.LATD0 = 0;
+//        LATDbits.LATD1 = 0;
+//        Delay_us(10);
         
-        Delay_ms(1000);
         
-        print_BLE("\n\n-----\nDesno: ");
-        WriteUART2dec2string(distancaDesno);
-        print_BLE("\nLevo: ");
-        WriteUART2dec2string(distancaLevo);
-        
-        if(vrednost_analogni_senzor > 1100) 
-        {
-            print_BLE("\nIspred: ");
-            WriteUART2dec2string(vrednost_analogni_senzor);
-        }
-        print_BLE("\n-----\n\n");
-        
+        //Delay_ms(1000);     
     }
     return 0;
 } 
