@@ -1,18 +1,21 @@
 #include <p30fxxxx.h>
 #include "timer.h"
 
-// TIMER1 radi svakih 1us
-// TIMER2 radi svake 1ms
+#define TMR1_period 50000 // HC-SR04
 
-#define TMR1_period 10 /*  Fosc = 10MHz,
-					          1/Fosc = 0.1us !!!, 0.1us * 10 = 1us  */
+#define TMR2_period 500 // PWM1
 
-#define TMR2_period 500 /*  Fosc = 10MHz,
-					          1/Fosc = 0.1us !!!, 0.1us * 10000 = 1ms  */
+#define TMR3_period 500 // PWM2
 
-#define TMR3_period 50000
+#define TMR4_period 50000 // HC-SR04
 
-#define TMR4_period 50000
+#define TMR5_period 10
+/*  
+ * Fosc = 10MHz
+ * 1/Fosc = 0.1us 
+ * 0.1us * 10 = 1us
+ * TMR5_period = 10
+ */
 
 
 void Init_T1(void)
@@ -87,7 +90,7 @@ void Init_T4(void)
 void Init_T5(void)
 {
 	TMR5 = 0;
-	PR5 = TMR2_period;
+	PR5 = TMR5_period;
 	
 	T5CONbits.TCS = 0; // 0 = Internal clock (FOSC/4)
     T5CONbits.TCKPS0 = 0;

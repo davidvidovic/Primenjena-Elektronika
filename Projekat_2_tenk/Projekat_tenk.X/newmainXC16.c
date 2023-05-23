@@ -9,17 +9,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <p30fxxxx.h>
-#include "outcompare.h"
 
 #include "uart.h"
 #include "ADC.h"
 #include "timer.h"
 #include "pins.h"
 #include "hc-sr04.h"
-#include "timer2.h"
-#include <stdbool.h> 
-#include <stdlib.h>
-#include <stdio.h>
 
 
 _FOSC(CSW_FSCM_OFF & XT_PLL4); // takt 10MHz
@@ -41,7 +36,7 @@ unsigned char overflow_flag_levo;
 int distancaDesno;
 int distancaLevo;
 
-char rec[10];
+char word_START[10] = "";
 int indeks = 0;
 
 
@@ -52,14 +47,14 @@ int indeks = 0;
 void Delay_us(int pauza)
 {
     brojac_us = 0;
-    T1CONbits.TON = 1; // T1 on
+    T5CONbits.TON = 1; // T5 on
     
     while(brojac_us < pauza);
     
-    T1CONbits.TON = 0; // T1 off
+    T5CONbits.TON = 0; // T5 off
 }
 
-
+/*
 void Delay_ms(int pauza)
 {
     brojac_ms = 0;
@@ -69,6 +64,7 @@ void Delay_ms(int pauza)
     
     T5CONbits.TON = 0; // T5 off
 }
+*/
 
 // -----------------------------------
 // PREKIDNE RUTINE
@@ -88,60 +84,43 @@ void __attribute__((__interrupt__, no_auto_psv)) _U1RXInterrupt(void)
 // Prekidna rutina za UART2 - BLE komunikacija
 void __attribute__((__interrupt__, no_auto_psv)) _U2RXInterrupt(void) 
 {
-    //rec[indeks] = U2RXREG;
-    //rec[++indeks] = '\0';
-    //IFS1bits.U2RXIF = 0;
-    tempRX_BLE = U2RXREG;
     IFS1bits.U2RXIF = 0;
-    WriteUART2('-');
-    WriteUART2(tempRX_BLE);
-    //tempRX_BLE = NULL;
-    WriteUART2('#');
-    U2STAbits.OERR = 0;
-    U2STAbits.FERR = 0;
-    U2STAbits.PERR = 0;
-    //Delay_ms(50);
-    //print_BLE(rec[indeks]);
-	
+    tempRX_BLE = U2RXREG;
+    
     // KOD
-    
-    //print_BLE("\n---\nPrimio sam: ");
-    //WriteUART2(tempRX_BLE);
-    //print_BLE("Indeks na koji upisujem: ");
-    //WriteUART2(indeks+48);
+    if(tempRX_BLE != 0)
+    {
+        word_START[indeks] = tempRX_BLE;
+        tempRX_BLE = 0;
 
-    //rec[indeks] = tempRX_BLE;
-
-    //if(indeks == 5) indeks = 0;
-
-    
-    //tempRX_BLE = 0;
-    
-} 
+        if(indeks < 6)
+           indeks++;
+        else indeks = 0;
+    }
+}  
 
 
-// Prekidna rutina za TIMER1 koji broji mikrosekunde (us)
+// Prekidna rutina za TIMER1 - desni HCSR04 echo
 void __attribute__ ((__interrupt__, no_auto_psv)) _T1Interrupt(void)
 {
-	TMR1 = 0;   
-	brojac_us++;
-	IFS0bits.T1IF = 0;    
+	IFS0bits.T1IF = 0;
+    overflow_flag_desno = 1;
+    PORTDbits.RD8 = 0;  
 }
 
-// Prekidna rutina za TIMER2 koji se koristi za PWM
-void __attribute__((__interrupt__)) _T2Interrupt(void) // pwm
+// Prekidna rutina za TIMER2 koji se koristi za PWM1
+void __attribute__((__interrupt__, no_auto_psv)) _T2Interrupt(void) // pwm
 {
     TMR2 = 0;
     IFS0bits.T2IF = 0;
 }
 
 
-// Prekidna rutina za TIMER3
+// Prekidna rutina za TIMER3 koji se koristi za PWM2
 void __attribute__ ((__interrupt__, no_auto_psv)) _T3Interrupt(void)
 {
+    TMR3 = 0;
     IFS0bits.T3IF = 0;
-    overflow_flag_desno = 1;
-    PORTDbits.RD8 = 0;
 } 
 
 
@@ -154,11 +133,11 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _T4Interrupt(void)
 } 
 
 
-// Prekidna rutina za TIMER5 koji broji milisekunde (ms)
+// Prekidna rutina za TIMER5 koji broji mikrosekunde (us)
 void __attribute__ ((__interrupt__, no_auto_psv)) _T5Interrupt(void)
 {
 	TMR5 = 0;   
-	brojac_ms++;
+	brojac_us++;
 	IFS1bits.T5IF = 0;    
 } 
 
@@ -249,29 +228,29 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _INT2Interrupt(void)
 void __attribute__ ((__interrupt__, no_auto_psv)) _INT1Interrupt(void)
 {   
     // Ako je interrupt desio jer je ECHO pin postao 1
-    // Treba da zapocnemo T3 i merenje vremena   
+    // Treba da zapocnemo T1 i merenje vremena   
     if(PORTDbits.RD8 == 1)
     {
         // Neka je INT1 senzitivan na opadajucu ivicu
         INTCON2bits.INT1EP = 1;
         
         // Pocinjemo meriti vreme koliko je ECHO pin na logickoj jedinici
-        TMR3 = 0;
+        TMR1 = 0;
         
-        // Spustam flag T3 interrupta
-        IFS0bits.T3IF = 0;
+        // Spustam flag T1 interrupta
+        IFS0bits.T1IF = 0;
 
-        // T3 ON
-        T3CONbits.TON = 1; 
+        // T1 ON
+        T1CONbits.TON = 1; 
     }
     
     // Ako je interrupt desio jer je ECHO pin postao 0
-    // Treba da stopiramo T3 i merenje vremena
+    // Treba da stopiramo T1 i merenje vremena
     // I izracunamo distancu
     else
     {
-        // Gasim T3
-        T3CONbits.TON = 0;
+        // Gasim T1
+        T1CONbits.TON = 0;
         
         if(overflow_flag_desno)
         {
@@ -279,7 +258,7 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _INT1Interrupt(void)
         }
         else
         {
-            distancaDesno = TMR3 * 0.01715 / 10;
+            distancaDesno = TMR1 * 0.01715 / 10;
         }
         
         overflow_flag_desno = 0;
@@ -312,82 +291,73 @@ void meriLevo()
 void meriIspred()
 {
     ADCON1bits.ADON = 1;
-    Delay_ms(10);
+    Delay_us(1000);
     ADCON1bits.ADON = 0;
 }
 
 
-
-void PWM1()
+void PWM()
 {
-//    PR2 = 500;//odredjuje frekvenciju po formuli
-//    OC1RS = dutyC;//postavimo pwm
-//    OC1R = 1000;//inicijalni pwm pri paljenju samo
-//    OC1CON  = OC_IDLE_CON & OC_TIMER2_SRC & OC_PWM_FAULT_PIN_DISABLE& T2_PS_1_256;//konfiguracija pwma
-//                   
-//    T2CONbits.TON = 1;//ukljucujemo timer koji koristi
-    //PR2=50;
-    //OC1RS= 1;
-    OC1R =10;
+    // Biram T2 kao tajmer za PWM1 modul
+    OC1CONbits.OCTSEL = 0;
+    // Biram T3 kao tajmer za PWM1 modul
+    OC2CONbits.OCTSEL = 1;
+    
+    // Inicijalni duty cycle
+    OC1R = 0;
+    OC2R = 0;
+    
+    // 110 - PWM mode without fault protection input
     OC1CONbits.OCM = 0b110;
+    OC2CONbits.OCM = 0b110;   
+    
+    // 00 - Tajmer koristi 1:1 prescale (valjda)
     T2CONbits.TCKPS = 0b00;
+    T3CONbits.TCKPS = 0b00;
+       
+    OC1RS = 350;
+    OC2RS = 350;
 
-    T2CONbits.TON=1;
+    T2CONbits.TON = 1;
+    T3CONbits.TON = 1;
 }
 
-void PWM2()
-{
-    //PR2=10;
-    //OC2RS= 1;
-    OC2R = 1000;
-    OC2CONbits.OCM = 0b110;
-    T2CONbits.TCKPS = 0b00;
 
-    T2CONbits.TON=1;
+void stani()
+{
+    LATBbits.LATB11 = 0;
+    LATFbits.LATF1 = 0;
+
+    LATBbits.LATB12 = 0;
+    LATFbits.LATF0 = 0;
 }
 
 void voziNapred()
 {
-    LATFbits.LATF1 = 1;
-    LATBbits.LATB1 = 0;
-    PWM1();
+    LATBbits.LATB11 = 1;
+    LATFbits.LATF1 = 0;
 
     LATBbits.LATB12 = 1;
     LATFbits.LATF0 = 0;
-    PWM2();
 }
 
 void voziNazad()
 {
+    LATBbits.LATB11 = 0;
     LATFbits.LATF1 = 1;
-    LATBbits.LATB1 = 0;
-    PWM1(400);
 
-    LATBbits.LATB12 = 1;
-    LATFbits.LATF0 = 0;
-    PWM2(400);
+    LATBbits.LATB12 = 0;
+    LATFbits.LATF0 = 1;
 }
 
-void skrenLevo()
+void skreniLevo()
 {
-    LATFbits.LATF1 = 1;
-    LATBbits.LATB1 = 1;
-    PWM1(400);
-
-    LATBbits.LATB12 = 1;
-    LATFbits.LATF0 = 1;
-    PWM2(400);    
+      
 }
 
 void skreniDesno()
 {
-    LATFbits.LATF1 = 1;
-    LATBbits.LATB1 = 1;
-    PWM1(400);
-
-    LATBbits.LATB12 = 1;
-    LATFbits.LATF0 = 1;
-    PWM2(400);    
+    
 }
 
 
@@ -414,36 +384,71 @@ int main(void) {
     print_BLE("Inicijalizacija zavrsena!");
     
     indeks = 0;
-    //PWM2();
-   // PWM1();
     
     
+    stani();
+    PWM();    
+    
+     
     // Glavna - super petlja
     while(1)
     {
-        //meriDesno();
-        //meriLevo();
-        //meriIspred();
-        voziNapred();
-//        LATFbits.LATF1 = 1;
-//        LATBbits.LATB1 = 0;
-//        
-//        LATBbits.LATB12 = 1;
-//        LATFbits.LATF0 = 0;
-//
-//
-//        LATBbits.LATB12 = 1;
-//        LATFbits.LATF0 = 0;
-//    
-//        LATDbits.LATD0 = 1;
-//        LATDbits.LATD1 = 1;
-//        Delay_us(90);
-//        LATDbits.LATD0 = 0;
-//        LATDbits.LATD1 = 0;
-//        Delay_us(10);
+        
+        while(word_START[0] != 'S' &&
+              word_START[1] != 'T' &&
+              word_START[2] != 'A' &&
+              word_START[3] != 'R' &&
+              word_START[4] != 'T' 
+        );
+        
+        word_START[0] = 0;
+        word_START[1] = 0;
+        word_START[2] = 0;
+        word_START[3] = 0;
+        indeks = 0;
+        
+        print_BLE("Pokretanje!");
         
         
-        //Delay_ms(1000);     
+        
+        while(word_START[0] != 'S' &&
+              word_START[1] != 'T' &&
+              word_START[2] != 'O' &&
+              word_START[3] != 'P' 
+              )
+        {
+            meriLevo();
+            meriIspred();
+            meriDesno();
+        
+        
+            if(distancaLevo > 10 + 5) // +5 jer je senzor 5cm udaljen od ivice tocka
+            {
+                //skreniLevo();
+                print_BLE("Skrecem levo\n");
+            }
+            else if(vrednost_analogni_senzor < 1200)
+            {
+                //voziNapred();
+                print_BLE("Napred\n");
+            }
+            else if(distancaDesno > 10 + 8) // 8cm udaljen od desne ivice tenka
+            {
+                //skreniDesno();
+                print_BLE("Skrecem desno\n");
+            }
+            else
+            {
+                //voziNazad();
+                print_BLE("Vozim unazad\n");
+            }
+        }
+        
+        print_BLE("Zaustavljanje.");
+        
+        indeks = 0;
+       
+        
     }
     return 0;
 } 
