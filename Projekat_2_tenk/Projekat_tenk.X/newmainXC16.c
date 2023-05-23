@@ -6,8 +6,6 @@
  */
 
 #include "xc.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include <p30fxxxx.h>
 
 #include "uart.h"
@@ -15,6 +13,8 @@
 #include "timer.h"
 #include "pins.h"
 #include "hc-sr04.h"
+#include "pwm.h"
+#include "motor_control.h"
 
 
 _FOSC(CSW_FSCM_OFF & XT_PLL4); // takt 10MHz
@@ -35,6 +35,7 @@ unsigned char overflow_flag_desno;
 unsigned char overflow_flag_levo;
 int distancaDesno;
 int distancaLevo;
+int duty_cycle;
 
 char word_START[10] = "";
 int indeks = 0;
@@ -69,14 +70,27 @@ void Delay_ms(int pauza)
 // -----------------------------------
 // PREKIDNE RUTINE
 
-
 // Prekidna rutina za UART1 - DEBUG svrhe
 void __attribute__((__interrupt__, no_auto_psv)) _U1RXInterrupt(void) 
 {
     tempRX_DEBUG = U1RXREG;
 	
-    // KOD
-  
+    // Ukoliko se dobije '+' treba da se poveca duty cycle PWM-a
+    // Na '-' se smanjuje
+    // Povecavanje/smanjivianje za 5% (25 je 5% od 500, a OCxRS = 500 je 100% duty cycle)
+    if(tempRX_DEBUG == '+')
+    {
+        duty_cycle += 25;
+        if(duty_cycle > 500) duty_cycle = 500;
+    }
+    
+    if(tempRX_DEBUG == '-')
+    {
+        duty_cycle -= 25;
+        if(duty_cycle < 0) duty_cycle = 0;
+    }
+    
+    PWM_set_duty_cycle(duty_cycle);
     IFS0bits.U1RXIF = 0;
 } 
 
@@ -138,7 +152,7 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _T5Interrupt(void)
 {
 	TMR5 = 0;   
 	brojac_us++;
-	IFS1bits.T5IF = 0;    
+    IFS1bits.T5IF = 0;    
 } 
 
 
@@ -271,6 +285,14 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _INT1Interrupt(void)
 }
 
 
+// Oko 1100 vrednosti analognog senzora je prepreka na 10cm udaljenosti
+void meriIspred()
+{
+    ADCON1bits.ADON = 1;
+    Delay_us(1000);
+    ADCON1bits.ADON = 0;
+}
+
 void meriDesno()
 {
     // Dajem trigger pinu logicku jedinicu u trajanju 10us
@@ -286,80 +308,6 @@ void meriLevo()
     Delay_us(10);
     LATDbits.LATD3 = 0;
 }
-
-// Oko 1100 vrednosti analognog senzora je prepreka na 10cm udaljenosti
-void meriIspred()
-{
-    ADCON1bits.ADON = 1;
-    Delay_us(1000);
-    ADCON1bits.ADON = 0;
-}
-
-
-void PWM()
-{
-    // Biram T2 kao tajmer za PWM1 modul
-    OC1CONbits.OCTSEL = 0;
-    // Biram T3 kao tajmer za PWM1 modul
-    OC2CONbits.OCTSEL = 1;
-    
-    // Inicijalni duty cycle
-    OC1R = 0;
-    OC2R = 0;
-    
-    // 110 - PWM mode without fault protection input
-    OC1CONbits.OCM = 0b110;
-    OC2CONbits.OCM = 0b110;   
-    
-    // 00 - Tajmer koristi 1:1 prescale (valjda)
-    T2CONbits.TCKPS = 0b00;
-    T3CONbits.TCKPS = 0b00;
-       
-    OC1RS = 350;
-    OC2RS = 350;
-
-    T2CONbits.TON = 1;
-    T3CONbits.TON = 1;
-}
-
-
-void stani()
-{
-    LATBbits.LATB11 = 0;
-    LATFbits.LATF1 = 0;
-
-    LATBbits.LATB12 = 0;
-    LATFbits.LATF0 = 0;
-}
-
-void voziNapred()
-{
-    LATBbits.LATB11 = 1;
-    LATFbits.LATF1 = 0;
-
-    LATBbits.LATB12 = 1;
-    LATFbits.LATF0 = 0;
-}
-
-void voziNazad()
-{
-    LATBbits.LATB11 = 0;
-    LATFbits.LATF1 = 1;
-
-    LATBbits.LATB12 = 0;
-    LATFbits.LATF0 = 1;
-}
-
-void skreniLevo()
-{
-      
-}
-
-void skreniDesno()
-{
-    
-}
-
 
 
 int main(void) {
@@ -378,21 +326,22 @@ int main(void) {
     ADCON1bits.ADON = 0;
     
     overflow_flag_desno = 0;
-    overflow_flag_levo = 0;
-    
+    overflow_flag_levo = 0;    
     
     print_BLE("Inicijalizacija zavrsena!");
     
-    indeks = 0;
+    indeks = 0; 
     
-    
+    // Inicijalno faktor ispune postavljamo na 70%
+    duty_cycle = 350;
     stani();
-    PWM();    
+    PWM_init();    
     
      
     // Glavna - super petlja
     while(1)
     {
+        print_BLE("Za pokretanje posaljite 'START'.\n");
         
         while(word_START[0] != 'S' &&
               word_START[1] != 'T' &&
@@ -444,11 +393,8 @@ int main(void) {
             }
         }
         
-        print_BLE("Zaustavljanje.");
-        
-        indeks = 0;
-       
-        
+        print_BLE("Zaustavljanje.\n");
+        print_BLE("Za ponovno pokretanje restartujte mikrokontroler.");     
     }
     return 0;
 } 

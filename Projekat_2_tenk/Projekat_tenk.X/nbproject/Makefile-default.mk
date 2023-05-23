@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=ADC.c timer.c pins.c newmainXC16.c hc-sr04.c uart.c
+SOURCEFILES_QUOTED_IF_SPACED=ADC.c timer.c pins.c newmainXC16.c hc-sr04.c uart.c pwm.c motor_control.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ADC.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/pins.o ${OBJECTDIR}/newmainXC16.o ${OBJECTDIR}/hc-sr04.o ${OBJECTDIR}/uart.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/ADC.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/pins.o.d ${OBJECTDIR}/newmainXC16.o.d ${OBJECTDIR}/hc-sr04.o.d ${OBJECTDIR}/uart.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ADC.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/pins.o ${OBJECTDIR}/newmainXC16.o ${OBJECTDIR}/hc-sr04.o ${OBJECTDIR}/uart.o ${OBJECTDIR}/pwm.o ${OBJECTDIR}/motor_control.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/ADC.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/pins.o.d ${OBJECTDIR}/newmainXC16.o.d ${OBJECTDIR}/hc-sr04.o.d ${OBJECTDIR}/uart.o.d ${OBJECTDIR}/pwm.o.d ${OBJECTDIR}/motor_control.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/ADC.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/pins.o ${OBJECTDIR}/newmainXC16.o ${OBJECTDIR}/hc-sr04.o ${OBJECTDIR}/uart.o
+OBJECTFILES=${OBJECTDIR}/ADC.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/pins.o ${OBJECTDIR}/newmainXC16.o ${OBJECTDIR}/hc-sr04.o ${OBJECTDIR}/uart.o ${OBJECTDIR}/pwm.o ${OBJECTDIR}/motor_control.o
 
 # Source Files
-SOURCEFILES=ADC.c timer.c pins.c newmainXC16.c hc-sr04.c uart.c
+SOURCEFILES=ADC.c timer.c pins.c newmainXC16.c hc-sr04.c uart.c pwm.c motor_control.c
 
 
 
@@ -131,6 +131,18 @@ ${OBJECTDIR}/uart.o: uart.c  .generated_files/flags/default/9cd0e2fddeb79d7c4ae3
 	@${RM} ${OBJECTDIR}/uart.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  uart.c  -o ${OBJECTDIR}/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/uart.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
+${OBJECTDIR}/pwm.o: pwm.c  .generated_files/flags/default/4a9daf0fe7590652214c628e9f3d72206685808c .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/pwm.o.d 
+	@${RM} ${OBJECTDIR}/pwm.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  pwm.c  -o ${OBJECTDIR}/pwm.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/pwm.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/motor_control.o: motor_control.c  .generated_files/flags/default/63072beb00a509b07b151b26c7d0bc1615b7d3c1 .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/motor_control.o.d 
+	@${RM} ${OBJECTDIR}/motor_control.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  motor_control.c  -o ${OBJECTDIR}/motor_control.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/motor_control.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 else
 ${OBJECTDIR}/ADC.o: ADC.c  .generated_files/flags/default/dae55d67836db70dec6aa54c81e17f1f06bd69c5 .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
 	@${MKDIR} "${OBJECTDIR}" 
@@ -167,6 +179,18 @@ ${OBJECTDIR}/uart.o: uart.c  .generated_files/flags/default/8fadd9dd0e3840d7d193
 	@${RM} ${OBJECTDIR}/uart.o.d 
 	@${RM} ${OBJECTDIR}/uart.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  uart.c  -o ${OBJECTDIR}/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/uart.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/pwm.o: pwm.c  .generated_files/flags/default/e42e46934abf64a83e211db24b401880140a6d88 .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/pwm.o.d 
+	@${RM} ${OBJECTDIR}/pwm.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  pwm.c  -o ${OBJECTDIR}/pwm.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/pwm.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/motor_control.o: motor_control.c  .generated_files/flags/default/959790984b1cecc89421535701bc9d2b95c56af7 .generated_files/flags/default/fd67b544a79261c2fe49714d5749bb13d89b49dc
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/motor_control.o.d 
+	@${RM} ${OBJECTDIR}/motor_control.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  motor_control.c  -o ${OBJECTDIR}/motor_control.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/motor_control.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 endif
 

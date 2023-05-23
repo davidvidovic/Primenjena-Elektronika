@@ -5,6 +5,5 @@
 
 void InitInterrupts();
 
-
 #endif	/* HC_SR04_H */
 
