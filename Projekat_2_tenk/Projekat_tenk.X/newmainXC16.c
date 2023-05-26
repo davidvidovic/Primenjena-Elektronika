@@ -55,17 +55,17 @@ void Delay_us(int pauza)
     T5CONbits.TON = 0; // T5 off
 }
 
-/*
+
 void Delay_ms(int pauza)
 {
     brojac_ms = 0;
-    T5CONbits.TON = 1; // T5 on
+    T3CONbits.TON = 1; // T3 on
     
     while(brojac_ms < pauza);
     
-    T5CONbits.TON = 0; // T5 off
+    T3CONbits.TON = 0; // T3 off
 }
-*/
+
 
 // -----------------------------------
 // PREKIDNE RUTINE
@@ -122,7 +122,7 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _T1Interrupt(void)
     PORTDbits.RD8 = 0;  
 }
 
-// Prekidna rutina za TIMER2 koji se koristi za PWM1
+// Prekidna rutina za TIMER2 koji se koristi za PWM
 void __attribute__((__interrupt__, no_auto_psv)) _T2Interrupt(void) // pwm
 {
     TMR2 = 0;
@@ -130,11 +130,12 @@ void __attribute__((__interrupt__, no_auto_psv)) _T2Interrupt(void) // pwm
 }
 
 
-// Prekidna rutina za TIMER3 koji se koristi za PWM2
+// Prekidna rutina za TIMER3 koji broji milisekunde
 void __attribute__ ((__interrupt__, no_auto_psv)) _T3Interrupt(void)
 {
-    TMR3 = 0;
-    IFS0bits.T3IF = 0;
+    TMR3 = 0;   
+	brojac_ms++;
+    IFS0bits.T3IF = 0;  
 } 
 
 
@@ -289,7 +290,7 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _INT1Interrupt(void)
 void meriIspred()
 {
     ADCON1bits.ADON = 1;
-    Delay_us(1000);
+    Delay_ms(10);
     ADCON1bits.ADON = 0;
 }
 
@@ -343,6 +344,7 @@ int main(void) {
     {
         meriDesno();
         skreniLevo();
+        Delay_ms(1000);
         //else stani();
         //Delay_us(10000);
         /*

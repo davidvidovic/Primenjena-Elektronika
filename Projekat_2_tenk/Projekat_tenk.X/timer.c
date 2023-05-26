@@ -3,9 +3,15 @@
 
 #define TMR1_period 50000 // HC-SR04
 
-#define TMR2_period 500 // PWM1
+#define TMR2_period 500 // PWM
 
-#define TMR3_period 500 // PWM2
+#define TMR3_period 10000
+/*  
+ * Fosc = 10MHz
+ * 1/Fosc = 0.1us 
+ * 0.1us * 10000 = 1ms
+ * TMR5_period = 10000
+ */
 
 #define TMR4_period 50000 // HC-SR04
 
