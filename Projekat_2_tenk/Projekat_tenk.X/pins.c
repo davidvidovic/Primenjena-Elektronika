@@ -25,8 +25,8 @@ void InitPins()
     TRISDbits.TRISD8 = 1;   // Echo za HCSR2
     TRISDbits.TRISD9 = 1;   // Echo za HCSR1
     
-    TRISFbits.TRISF0 = 1;   // IN4 drajvera
-    TRISFbits.TRISF1 = 1;   // IN1 drajvera
+    TRISFbits.TRISF0 = 0;   // IN4 drajvera
+    TRISFbits.TRISF1 = 0;   // IN1 drajvera
     
     
     // Inicijalizacija analognih pinova

@@ -341,6 +341,11 @@ int main(void) {
     // Glavna - super petlja
     while(1)
     {
+        meriDesno();
+        skreniLevo();
+        //else stani();
+        //Delay_us(10000);
+        /*
         print_BLE("Za pokretanje posaljite 'START'.\n");
         
         while(word_START[0] != 'S' &&
@@ -394,7 +399,8 @@ int main(void) {
         }
         
         print_BLE("Zaustavljanje.\n");
-        print_BLE("Za ponovno pokretanje restartujte mikrokontroler.");     
+        print_BLE("Za ponovno pokretanje restartujte mikrokontroler.");   
+        */
     }
     return 0;
 } 
