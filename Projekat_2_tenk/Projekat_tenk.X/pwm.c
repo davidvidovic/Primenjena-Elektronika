@@ -16,16 +16,18 @@ void PWM_init()
     
     // 00 - Tajmer koristi 1:1 prescale (valjda)
     T2CONbits.TCKPS = 0b00;
+    //T3CONbits.TCKPS = 0b00;
        
-    // duty_cycle je inicijalno 350
-    OC1RS = 350;
-    OC2RS = 350;
+    // duty_cycle je inicijalno 
+    OC1RS = 160;
+    OC2RS = 85;
 
     T2CONbits.TON = 1;
+    //T3CONbits.TON = 1;
 }
 
-void PWM_set_duty_cycle(int new_duty_cycle)
+void PWM_set_duty_cycle(int new_duty_cycle1, int new_duty_cycle2)
 {
-    OC1RS = new_duty_cycle;
-    OC2RS = new_duty_cycle;
+   OC1RS = new_duty_cycle1;
+   OC2RS = new_duty_cycle2;
 }

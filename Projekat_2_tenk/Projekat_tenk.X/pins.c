@@ -8,11 +8,11 @@ void InitPins()
     TRISAbits.TRISA11 = 0;  // Ugradjena LED dioda
     
     TRISBbits.TRISB0 = 1;   // Analogni senzor
-    // TRISBbits.TRISB1 = 1;   // Analogna letvica
-    // TRISBbits.TRISB2 = 1;   // Analogna letvica
-    // TRISBbits.TRISB3 = 1;   // Analogna letvica
-    // TRISBbits.TRISB4 = 1;   // Analogna letvica
-    // TRISBbits.TRISB5 = 1;   // Analogna letvica
+    TRISBbits.TRISB1 = 0;   // Analogna letvica
+    TRISBbits.TRISB2 = 0;   // Analogna letvica
+    TRISBbits.TRISB3 = 0;   // Analogna letvica
+    TRISBbits.TRISB4 = 0;   // Analogna letvica
+    // TRISBbits.TRISB5 = 0;   // Analogna letvica
     TRISBbits.TRISB9 = 1;   // Rsens1
     TRISBbits.TRISB10 = 1;  // Rsens2
     TRISBbits.TRISB11 = 0;  // IN2 drajvera
@@ -32,11 +32,11 @@ void InitPins()
     // Inicijalizacija analognih pinova
     
     ADPCFGbits.PCFG0 = 0;
-    // ADPCFGbits.PCFG1 = 0;
-    // ADPCFGbits.PCFG2 = 0;
-    // ADPCFGbits.PCFG3 = 0;
-    // ADPCFGbits.PCFG4 = 0;
-    // ADPCFGbits.PCFG5 = 0;
+    ADPCFGbits.PCFG1 = 1;
+    ADPCFGbits.PCFG2 = 1;
+    ADPCFGbits.PCFG3 = 1;
+    ADPCFGbits.PCFG4 = 1;
+    // ADPCFGbits.PCFG5 = 1;
     ADPCFGbits.PCFG9 = 0;
     ADPCFGbits.PCFG10 = 0;
     ADPCFGbits.PCFG11 = 1;

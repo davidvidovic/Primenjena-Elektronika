@@ -74,7 +74,7 @@ void Delay_ms(int pauza)
 void __attribute__((__interrupt__, no_auto_psv)) _U1RXInterrupt(void) 
 {
     tempRX_DEBUG = U1RXREG;
-	
+	/*
     // Ukoliko se dobije '+' treba da se poveca duty cycle PWM-a
     // Na '-' se smanjuje
     // Povecavanje/smanjivianje za 5% (25 je 5% od 500, a OCxRS = 500 je 100% duty cycle)
@@ -89,8 +89,9 @@ void __attribute__((__interrupt__, no_auto_psv)) _U1RXInterrupt(void)
         duty_cycle -= 25;
         if(duty_cycle < 0) duty_cycle = 0;
     }
+     * */
     
-    PWM_set_duty_cycle(duty_cycle);
+    //PWM_set_duty_cycle(duty_cycle);
     IFS0bits.U1RXIF = 0;
 } 
 
@@ -290,7 +291,7 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _INT1Interrupt(void)
 void meriIspred()
 {
     ADCON1bits.ADON = 1;
-    Delay_ms(10);
+    Delay_us(1000);
     ADCON1bits.ADON = 0;
 }
 
@@ -336,18 +337,21 @@ int main(void) {
     // Inicijalno faktor ispune postavljamo na 70%
     duty_cycle = 350;
     stani();
-    PWM_init();    
-    
-     
+    PWM_init();  
+
     // Glavna - super petlja
     while(1)
     {
-        meriDesno();
-        skreniLevo();
-        Delay_ms(1000);
-        //else stani();
-        //Delay_us(10000);
         /*
+        meriLevo();
+        meriIspred();
+        meriDesno();
+        if(distancaLevo < 15) voziNapred();
+        else stani();
+        */
+        
+        
+        
         print_BLE("Za pokretanje posaljite 'START'.\n");
         
         while(word_START[0] != 'S' &&
@@ -376,22 +380,50 @@ int main(void) {
             meriLevo();
             meriIspred();
             meriDesno();
+            
+            WriteUART2dec2string(vrednost_analogni_senzor);
+            print_BLE("\n");
         
-        
-            if(distancaLevo > 10 + 5) // +5 jer je senzor 5cm udaljen od ivice tocka
+            if(distancaLevo > 20 + 5) // +5 jer je senzor 5cm udaljen od ivice tocka
             {
-                //skreniLevo();
-                print_BLE("Skrecem levo\n");
+                // Pauziraj pola sekunde prije bilo skretanja
+                stani();
+                Delay_ms(500);
+                
+                // Skretanje levo, u trajanju delaya
+                skreniLevo();
+                Delay_ms(1100);
+                
+                // Nakon izvrsenog skretanja potrebno je voziti unapred dok se ponovo ne uhvati leva ivica
+                /*
+                voziNapred();
+                Delay_ms(600);
+                */
+                meriLevo();
+                while(distancaLevo > 25) 
+                {
+                    voziNapred();
+                    Delay_ms(100);
+                    meriLevo();
+                }
+                
+                stani();
+                //print_BLE("Skrecem levo\n");
             }
-            else if(vrednost_analogni_senzor < 1200)
+            else if(vrednost_analogni_senzor < 500)
             {
-                //voziNapred();
-                print_BLE("Napred\n");
+                voziNapred();
+                //print_BLE("Napred\n");
             }
-            else if(distancaDesno > 10 + 8) // 8cm udaljen od desne ivice tenka
+            else if(distancaDesno > 12 + 8) // 8cm udaljen od desne ivice tenka
             {
-                //skreniDesno();
-                print_BLE("Skrecem desno\n");
+                stani();
+                Delay_ms(500);
+                skreniDesno();
+                Delay_ms(1100);
+                voziNapred();
+                Delay_ms(600);
+                //print_BLE("Skrecem desno\n");
             }
             else
             {
@@ -402,7 +434,8 @@ int main(void) {
         
         print_BLE("Zaustavljanje.\n");
         print_BLE("Za ponovno pokretanje restartujte mikrokontroler.");   
-        */
+        
+        
     }
     return 0;
 } 

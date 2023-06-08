@@ -2,6 +2,7 @@
 #define	MOTOR_CONTROL_H
 
 #include <p30fxxxx.h>
+#include "pwm.h"
 
 void stani();
 void voziNapred();

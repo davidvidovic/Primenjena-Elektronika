@@ -3,7 +3,7 @@
 
 #define TMR1_period 50000 // HC-SR04
 
-#define TMR2_period 500 // PWM
+#define TMR2_period 250 // PWM
 
 #define TMR3_period 10000
 /*  
