@@ -334,8 +334,8 @@ int main(void) {
     
     indeks = 0; 
     
-    // Inicijalno faktor ispune postavljamo na 70%
-    duty_cycle = 350;
+    // Inicijalno faktor ispune postavljamo na
+    //duty_cycle = 350;
     stani();
     PWM_init();  
 
@@ -346,8 +346,13 @@ int main(void) {
         meriLevo();
         meriIspred();
         meriDesno();
-        if(distancaLevo < 15) voziNapred();
-        else stani();
+        WriteUART2dec2string(distancaDesno);
+        print_BLE("\n");
+        
+        WriteUART2dec2string(vrednost_analogni_senzor);
+        print_BLE("\n\n");
+        
+        Delay_ms(500);
         */
         
         
@@ -381,24 +386,27 @@ int main(void) {
             meriIspred();
             meriDesno();
             
-            WriteUART2dec2string(vrednost_analogni_senzor);
+            
+            WriteUART2dec2string(distancaLevo);
             print_BLE("\n");
         
             if(distancaLevo > 20 + 5) // +5 jer je senzor 5cm udaljen od ivice tocka
             {
-                // Pauziraj pola sekunde prije bilo skretanja
+                // Pauziraj pola sekunde prije skretanja
                 stani();
                 Delay_ms(500);
                 
                 // Skretanje levo, u trajanju delaya
                 skreniLevo();
-                Delay_ms(1100);
+                Delay_ms(820);
                 
                 // Nakon izvrsenog skretanja potrebno je voziti unapred dok se ponovo ne uhvati leva ivica
-                /*
+                
+                stani();
+                Delay_ms(500);
                 voziNapred();
-                Delay_ms(600);
-                */
+                Delay_ms(500);
+                
                 meriLevo();
                 while(distancaLevo > 25) 
                 {
@@ -406,6 +414,7 @@ int main(void) {
                     Delay_ms(100);
                     meriLevo();
                 }
+               
                 
                 stani();
                 //print_BLE("Skrecem levo\n");
@@ -417,13 +426,34 @@ int main(void) {
             }
             else if(distancaDesno > 12 + 8) // 8cm udaljen od desne ivice tenka
             {
+                // Pauziraj pola sekunde prije skretanja
                 stani();
                 Delay_ms(500);
+                
+                // Skretanje desno, u trajanju delaya
                 skreniDesno();
-                Delay_ms(1100);
+                Delay_ms(850);
+                
+                // Nakon izvrsenog skretanja potrebno je voziti unapred dok se ponovo ne uhvati leva ivica
+                
+                stani();
+                Delay_ms(500);
                 voziNapred();
-                Delay_ms(600);
-                //print_BLE("Skrecem desno\n");
+                Delay_ms(500);
+                
+                meriLevo();
+                while(distancaLevo > 25)
+                {
+                    skreniLevo();
+                    Delay_ms(50);
+                    
+                    stani();
+                    Delay_ms(100);
+                    meriLevo();
+                }
+                
+                stani();
+                //print_BLE("Skrecem levo\n");
             }
             else
             {

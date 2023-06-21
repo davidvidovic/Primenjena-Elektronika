@@ -19,8 +19,8 @@ void PWM_init()
     //T3CONbits.TCKPS = 0b00;
        
     // duty_cycle je inicijalno 
-    OC1RS = 160;
-    OC2RS = 85;
+    OC1RS = 150;
+    OC2RS = 150;
 
     T2CONbits.TON = 1;
     //T3CONbits.TON = 1;
