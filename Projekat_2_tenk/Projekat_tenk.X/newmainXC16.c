@@ -1,10 +1,3 @@
-/*
- * File:   newmainXC16.c
- * Author: david
- *
- * Created on 02. maj 2023., 09.12
- */
-
 #include "xc.h"
 #include <p30fxxxx.h>
 
@@ -36,6 +29,7 @@ unsigned char overflow_flag_levo;
 int distancaDesno;
 int distancaLevo;
 int duty_cycle;
+unsigned char flag_ispis;
 
 char word_START[10] = "";
 int indeks = 0;
@@ -286,7 +280,6 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _INT1Interrupt(void)
     IFS1bits.INT1IF = 0;
 }
 
-
 // Oko 1100 vrednosti analognog senzora je prepreka na 10cm udaljenosti
 void meriIspred()
 {
@@ -328,36 +321,20 @@ int main(void) {
     ADCON1bits.ADON = 0;
     
     overflow_flag_desno = 0;
-    overflow_flag_levo = 0;    
+    overflow_flag_levo = 0;  
     
-    print_BLE("Inicijalizacija zavrsena!");
-    
-    indeks = 0; 
-    
-    // Inicijalno faktor ispune postavljamo na
-    //duty_cycle = 350;
     stani();
-    PWM_init();  
-
+    PWM_init();
+    
+    print_BLE("Inicijalizacija zavrsena!\n\n");
+    
+    indeks = 0;   
+    flag_ispis = 0;
+    
     // Glavna - super petlja
     while(1)
     {
-        /*
-        meriLevo();
-        meriIspred();
-        meriDesno();
-        WriteUART2dec2string(distancaDesno);
-        print_BLE("\n");
-        
-        WriteUART2dec2string(vrednost_analogni_senzor);
-        print_BLE("\n\n");
-        
-        Delay_ms(500);
-        */
-        
-        
-        
-        print_BLE("Za pokretanje posaljite 'START'.\n");
+       print_BLE("Za pokretanje posaljite 'START'.\n");
         
         while(word_START[0] != 'S' &&
               word_START[1] != 'T' &&
@@ -374,8 +351,6 @@ int main(void) {
         
         print_BLE("Pokretanje!");
         
-        
-        
         while(word_START[0] != 'S' &&
               word_START[1] != 'T' &&
               word_START[2] != 'O' &&
@@ -385,13 +360,12 @@ int main(void) {
             meriLevo();
             meriIspred();
             meriDesno();
-            
-            
-            WriteUART2dec2string(distancaLevo);
-            print_BLE("\n");
-        
+              
             if(distancaLevo > 20 + 5) // +5 jer je senzor 5cm udaljen od ivice tocka
             {
+                print_BLE("Skrecem levo!\n");
+                flag_ispis = 0;
+                
                 // Pauziraj pola sekunde prije skretanja
                 stani();
                 Delay_ms(500);
@@ -415,17 +389,22 @@ int main(void) {
                     meriLevo();
                 }
                
-                
                 stani();
-                //print_BLE("Skrecem levo\n");
             }
             else if(vrednost_analogni_senzor < 500)
             {
                 voziNapred();
-                //print_BLE("Napred\n");
+                if(!flag_ispis)
+                {
+                    print_BLE("Vozim napred\n");
+                    flag_ispis = 1;
+                }
             }
             else if(distancaDesno > 12 + 8) // 8cm udaljen od desne ivice tenka
             {
+                print_BLE("Skrecem desno\n");
+                flag_ispis = 0;
+                
                 // Pauziraj pola sekunde prije skretanja
                 stani();
                 Delay_ms(500);
@@ -435,25 +414,10 @@ int main(void) {
                 Delay_ms(850);
                 
                 // Nakon izvrsenog skretanja potrebno je voziti unapred dok se ponovo ne uhvati leva ivica
-                
                 stani();
                 Delay_ms(500);
                 voziNapred();
                 Delay_ms(500);
-                
-                meriLevo();
-                while(distancaLevo > 25)
-                {
-                    skreniLevo();
-                    Delay_ms(50);
-                    
-                    stani();
-                    Delay_ms(100);
-                    meriLevo();
-                }
-                
-                stani();
-                //print_BLE("Skrecem levo\n");
             }
             else
             {
@@ -462,10 +426,7 @@ int main(void) {
             }
         }
         
-        print_BLE("Zaustavljanje.\n");
-        print_BLE("Za ponovno pokretanje restartujte mikrokontroler.");   
-        
-        
+        print_BLE("Zaustavljanje.\n"); 
     }
     return 0;
 } 
