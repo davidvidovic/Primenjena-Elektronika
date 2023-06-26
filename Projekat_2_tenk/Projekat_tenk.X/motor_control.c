@@ -1,27 +1,8 @@
 #include "motor_control.h"
 #include "pwm.h"
 
-/*
-// DESNI MOTOR
-// NAPRED
-LATFbits.LATF1 = 1; // IN1
-LATBbits.LATB11 = 0; // IN2
 
-// NAZAD
-LATFbits.LATF1 = 0; // IN1
-LATBbits.LATB11 = 1; // IN2
-
-// LEVI MOTOR
-// NAPRED
-LATBbits.LATB12 = 0; // IN3
-LATFbits.LATF0 = 1; // IN4
-
-// NAZAD
-LATBbits.LATB12 = 1; // IN3
-LATFbits.LATF0 = 0; // IN4
- */
-
-void stani()
+void stani(void)
 {
     LATBbits.LATB11 = 0;
     LATFbits.LATF1 = 0;
@@ -30,7 +11,7 @@ void stani()
     LATFbits.LATF0 = 0;
 }
 
-void voziNapred()
+void voziNapred(void)
 {
     PWM_set_duty_cycle(130, 150);
     
@@ -41,7 +22,7 @@ void voziNapred()
     LATFbits.LATF0 = 1; // IN4
 }
 
-void voziNazad()
+void voziNazad(void)
 {
     PWM_set_duty_cycle(130, 150);
     
@@ -53,7 +34,7 @@ void voziNazad()
     
 }
 
-void skreniLevo()
+void skreniLevo(void)
 {
     PWM_set_duty_cycle(200, 200);
     
@@ -66,7 +47,7 @@ void skreniLevo()
     LATFbits.LATF0 = 0; // IN4
 }
 
-void skreniDesno()
+void skreniDesno(void)
 {
     PWM_set_duty_cycle(200, 200);
     

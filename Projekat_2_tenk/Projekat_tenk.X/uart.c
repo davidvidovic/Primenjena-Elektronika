@@ -87,7 +87,7 @@ void InitUART2(void)
 	// UART1 - RF2, RF3
 	// UART1 alt - RC13, RC14
 	// UART2 - RF4, RF5
-    //U1MODEbits.ALTIO = 0; // koriste se RF2 i RF3
+    //U1MODEbits.ALTIO = 0; 
 	
 	// IEC1bits.U2RXIE registar omogucava prekid (interupt) pri prijemu podataka
     IEC1bits.U2RXIE = 1; // omogucavamo rx1 interupt

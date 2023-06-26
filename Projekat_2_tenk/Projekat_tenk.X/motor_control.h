@@ -4,11 +4,11 @@
 #include <p30fxxxx.h>
 #include "pwm.h"
 
-void stani();
-void voziNapred();
-void voziNazad();
-void skreniLevo();
-void skreniDesno();
+void stani(void);
+void voziNapred(void);
+void voziNazad(void);
+void skreniLevo(void);
+void skreniDesno(void);
 
 #endif	/* MOTOR_CONTROL_H */
 

@@ -26,7 +26,7 @@
 //#define IN1         LATFbits.LATF1 
 
 
-void InitPins();
+void InitPins(void);
 
 #endif	/* PINS_H */
 

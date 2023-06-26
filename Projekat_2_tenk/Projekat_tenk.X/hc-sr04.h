@@ -3,7 +3,7 @@
 
 #include <p30fxxxx.h>
 
-void InitInterrupts();
+void InitInterrupts(void);
 
 #endif	/* HC_SR04_H */
 

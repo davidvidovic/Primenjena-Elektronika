@@ -1,7 +1,7 @@
 #include "hc-sr04.h"
 
 
-void InitInterrupts()
+void InitInterrupts(void)
 {
     // INT1 ON
     IEC1bits.INT1IE = 1;    

@@ -28,39 +28,19 @@ unsigned char overflow_flag_desno;
 unsigned char overflow_flag_levo;
 int distancaDesno;
 int distancaLevo;
-int duty_cycle;
 unsigned char flag_ispis;
-unsigned char reverse_flag;
 
 char word_START[10] = "";
 int indeks = 0;
 
-
 // -----------------------------------
-// DELAY FUNKCIJE
+// DEKLARACIJE FUNKCIJA
 
-
-void Delay_us(int pauza)
-{
-    brojac_us = 0;
-    T5CONbits.TON = 1; // T5 on
-    
-    while(brojac_us < pauza);
-    
-    T5CONbits.TON = 0; // T5 off
-}
-
-
-void Delay_ms(int pauza)
-{
-    brojac_ms = 0;
-    T3CONbits.TON = 1; // T3 on
-    
-    while(brojac_ms < pauza);
-    
-    T3CONbits.TON = 0; // T3 off
-}
-
+void Delay_us(int pauza);
+void Delay_ms(int pauza);
+void meriIspred(void);
+void meriDesno(void);
+void meriLevo(void);
 
 // -----------------------------------
 // PREKIDNE RUTINE
@@ -69,24 +49,9 @@ void Delay_ms(int pauza)
 void __attribute__((__interrupt__, no_auto_psv)) _U1RXInterrupt(void) 
 {
     tempRX_DEBUG = U1RXREG;
-	/*
-    // Ukoliko se dobije '+' treba da se poveca duty cycle PWM-a
-    // Na '-' se smanjuje
-    // Povecavanje/smanjivianje za 5% (25 je 5% od 500, a OCxRS = 500 je 100% duty cycle)
-    if(tempRX_DEBUG == '+')
-    {
-        duty_cycle += 25;
-        if(duty_cycle > 500) duty_cycle = 500;
-    }
-    
-    if(tempRX_DEBUG == '-')
-    {
-        duty_cycle -= 25;
-        if(duty_cycle < 0) duty_cycle = 0;
-    }
-     * */
-    
-    //PWM_set_duty_cycle(duty_cycle);
+	
+    // KOD
+
     IFS0bits.U1RXIF = 0;
 } 
 
@@ -97,7 +62,6 @@ void __attribute__((__interrupt__, no_auto_psv)) _U2RXInterrupt(void)
     IFS1bits.U2RXIF = 0;
     tempRX_BLE = U2RXREG;
     
-    // KOD
     if(tempRX_BLE != 0)
     {
         word_START[indeks] = tempRX_BLE;
@@ -119,7 +83,7 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _T1Interrupt(void)
 }
 
 // Prekidna rutina za TIMER2 koji se koristi za PWM
-void __attribute__((__interrupt__, no_auto_psv)) _T2Interrupt(void) // pwm
+void __attribute__((__interrupt__, no_auto_psv)) _T2Interrupt(void)
 {
     TMR2 = 0;
     IFS0bits.T2IF = 0;
@@ -281,29 +245,7 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _INT1Interrupt(void)
     IFS1bits.INT1IF = 0;
 }
 
-// Oko 1100 vrednosti analognog senzora je prepreka na 10cm udaljenosti
-void meriIspred()
-{
-    ADCON1bits.ADON = 1;
-    Delay_us(1000);
-    ADCON1bits.ADON = 0;
-}
 
-void meriDesno()
-{
-    // Dajem trigger pinu logicku jedinicu u trajanju 10us
-    LATDbits.LATD2 = 1;
-    Delay_us(10);
-    LATDbits.LATD2 = 0;
-}
-
-void meriLevo()
-{
-    // Dajem trigger pinu logicku jedinicu u trajanju 10us
-    LATDbits.LATD3 = 1;
-    Delay_us(10);
-    LATDbits.LATD3 = 0;
-}
 
 
 int main(void) {
@@ -331,7 +273,7 @@ int main(void) {
     
     indeks = 0;   
     flag_ispis = 0;
-    reverse_flag = 0;    
+   
     // Glavna - super petlja
     while(1)
     {
@@ -477,3 +419,56 @@ int main(void) {
     }
     return 0;
 } 
+
+
+// -----------------------------------
+// DELAY FUNKCIJE
+
+
+void Delay_us(int pauza)
+{
+    brojac_us = 0;
+    T5CONbits.TON = 1; // T5 on
+    
+    while(brojac_us < pauza);
+    
+    T5CONbits.TON = 0; // T5 off
+}
+
+
+void Delay_ms(int pauza)
+{
+    brojac_ms = 0;
+    T3CONbits.TON = 1; // T3 on
+    
+    while(brojac_ms < pauza);
+    
+    T3CONbits.TON = 0; // T3 off
+}
+
+// -----------------------------------
+// SENZORSKE FUNKCIJE
+
+// Oko 1100 vrednosti analognog senzora je prepreka na 10cm udaljenosti
+void meriIspred(void)
+{
+    ADCON1bits.ADON = 1;
+    Delay_us(1000);
+    ADCON1bits.ADON = 0;
+}
+
+void meriDesno(void)
+{
+    // Dajem trigger pinu logicku jedinicu u trajanju 10us
+    LATDbits.LATD2 = 1;
+    Delay_us(10);
+    LATDbits.LATD2 = 0;
+}
+
+void meriLevo(void)
+{
+    // Dajem trigger pinu logicku jedinicu u trajanju 10us
+    LATDbits.LATD3 = 1;
+    Delay_us(10);
+    LATDbits.LATD3 = 0;
+}

@@ -1,6 +1,6 @@
 #include "pwm.h"
 
-void PWM_init()
+void PWM_init(void)
 {
     // Biram T2 kao tajmer za PWM module
     OC1CONbits.OCTSEL = 0;
@@ -14,7 +14,7 @@ void PWM_init()
     OC1CONbits.OCM = 0b110;
     OC2CONbits.OCM = 0b110;   
     
-    // 00 - Tajmer koristi 1:1 prescale (valjda)
+    // 00 - Tajmer koristi 1:1 prescale
     T2CONbits.TCKPS = 0b00;
     //T3CONbits.TCKPS = 0b00;
        

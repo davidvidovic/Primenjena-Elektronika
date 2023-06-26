@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version="2.7"/>
+    <errors>
+        <error id="misra-c2012-7.4" severity="style" msg="Required Rule 7.4: A string literal shall not be assigned to an object unless the object’s type is “pointer to const-qualified char” Declarations and definitions" verbose="Required Rule 7.4: A string literal shall not be assigned to an object unless the object’s type is “pointer to const-qualified char” Declarations and definitions" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="33"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="49"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="60"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="78"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="86"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="94"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="103"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="112"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="121"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="155"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="203"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="23"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="22"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="21"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="20"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="30"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="31"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="29"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="33"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="34"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="28"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="27"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="24"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="26"/>
+        </error>
+        <error id="misra-c2012-8.4" severity="style" msg="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" verbose="Required Rule 8.4:  A compatible declaration shall be visible when an object or function with external linkage is defined" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="25"/>
+        </error>
+        <error id="misra-c2012-10.4" severity="style" msg="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" verbose="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="65"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="283"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="284"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="285"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="286"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="298"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="299"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="300"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="308"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="347"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="366"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="373"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="379"/>
+        </error>
+        <error id="misra-c2012-14.4" severity="style" msg="Required Rule 14.4: The controlling expression of an if statement and the controlling expression of an iteration-statement shall have essentially Boolean type" verbose="Required Rule 14.4: The controlling expression of an if statement and the controlling expression of an iteration-statement shall have essentially Boolean type" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="182"/>
+        </error>
+        <error id="misra-c2012-14.4" severity="style" msg="Required Rule 14.4: The controlling expression of an if statement and the controlling expression of an iteration-statement shall have essentially Boolean type" verbose="Required Rule 14.4: The controlling expression of an if statement and the controlling expression of an iteration-statement shall have essentially Boolean type" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="230"/>
+        </error>
+        <error id="misra-c2012-15.6" severity="style" msg="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" verbose="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="70"/>
+        </error>
+        <error id="misra-c2012-15.6" severity="style" msg="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" verbose="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="72"/>
+        </error>
+        <error id="misra-c2012-15.6" severity="style" msg="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" verbose="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="283"/>
+        </error>
+        <error id="misra-c2012-15.6" severity="style" msg="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" verbose="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="433"/>
+        </error>
+        <error id="misra-c2012-15.6" severity="style" msg="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" verbose="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="444"/>
+        </error>
+        <error id="misra-c2012-15.7" severity="style" msg="Required Rule 15.7: All if ... else if constructs shall be terminated with an else statement" verbose="Required Rule 15.7: All if ... else if constructs shall be terminated with an else statement" file0="analiza-cppcheck-build-dir/newmainXC16.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="414"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;_ADCInterrupt&amp;#039; is never used." verbose="The function &amp;#039;_ADCInterrupt&amp;#039; is never used." cwe="561" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="121"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;_INT1Interrupt&amp;#039; is never used." verbose="The function &amp;#039;_INT1Interrupt&amp;#039; is never used." cwe="561" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="203"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;_INT2Interrupt&amp;#039; is never used." verbose="The function &amp;#039;_INT2Interrupt&amp;#039; is never used." cwe="561" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="155"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;_T1Interrupt&amp;#039; is never used." verbose="The function &amp;#039;_T1Interrupt&amp;#039; is never used." cwe="561" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="78"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;_T2Interrupt&amp;#039; is never used." verbose="The function &amp;#039;_T2Interrupt&amp;#039; is never used." cwe="561" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="86"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;_T3Interrupt&amp;#039; is never used." verbose="The function &amp;#039;_T3Interrupt&amp;#039; is never used." cwe="561" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="94"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;_T4Interrupt&amp;#039; is never used." verbose="The function &amp;#039;_T4Interrupt&amp;#039; is never used." cwe="561" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="103"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;_T5Interrupt&amp;#039; is never used." verbose="The function &amp;#039;_T5Interrupt&amp;#039; is never used." cwe="561" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="112"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;_U1RXInterrupt&amp;#039; is never used." verbose="The function &amp;#039;_U1RXInterrupt&amp;#039; is never used." cwe="561" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="49"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;_U2RXInterrupt&amp;#039; is never used." verbose="The function &amp;#039;_U2RXInterrupt&amp;#039; is never used." cwe="561" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/newmainXC16.c" line="60"/>
+        </error>
+        <error id="misra-c2012-7.2" severity="style" msg="Required Rule 7.2: A “u” or “U” suffix shall be applied to all integer constants that are represented in an unsigned type" verbose="Required Rule 7.2: A “u” or “U” suffix shall be applied to all integer constants that are represented in an unsigned type" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="64"/>
+        </error>
+        <error id="misra-c2012-7.2" severity="style" msg="Required Rule 7.2: A “u” or “U” suffix shall be applied to all integer constants that are represented in an unsigned type" verbose="Required Rule 7.2: A “u” or “U” suffix shall be applied to all integer constants that are represented in an unsigned type" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="136"/>
+        </error>
+        <error id="misra-c2012-7.2" severity="style" msg="Required Rule 7.2: A “u” or “U” suffix shall be applied to all integer constants that are represented in an unsigned type" verbose="Required Rule 7.2: A “u” or “U” suffix shall be applied to all integer constants that are represented in an unsigned type" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="139"/>
+        </error>
+        <error id="misra-c2012-10.3" severity="style" msg="Required Rule 10.3: The value of an expression shall not be assigned to an object with a narrower essential type or of a different essential type category" verbose="Required Rule 10.3: The value of an expression shall not be assigned to an object with a narrower essential type or of a different essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="64"/>
+        </error>
+        <error id="misra-c2012-10.3" severity="style" msg="Required Rule 10.3: The value of an expression shall not be assigned to an object with a narrower essential type or of a different essential type category" verbose="Required Rule 10.3: The value of an expression shall not be assigned to an object with a narrower essential type or of a different essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="67"/>
+        </error>
+        <error id="misra-c2012-10.3" severity="style" msg="Required Rule 10.3: The value of an expression shall not be assigned to an object with a narrower essential type or of a different essential type category" verbose="Required Rule 10.3: The value of an expression shall not be assigned to an object with a narrower essential type or of a different essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="70"/>
+        </error>
+        <error id="misra-c2012-10.3" severity="style" msg="Required Rule 10.3: The value of an expression shall not be assigned to an object with a narrower essential type or of a different essential type category" verbose="Required Rule 10.3: The value of an expression shall not be assigned to an object with a narrower essential type or of a different essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="136"/>
+        </error>
+        <error id="misra-c2012-10.3" severity="style" msg="Required Rule 10.3: The value of an expression shall not be assigned to an object with a narrower essential type or of a different essential type category" verbose="Required Rule 10.3: The value of an expression shall not be assigned to an object with a narrower essential type or of a different essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="139"/>
+        </error>
+        <error id="misra-c2012-10.3" severity="style" msg="Required Rule 10.3: The value of an expression shall not be assigned to an object with a narrower essential type or of a different essential type category" verbose="Required Rule 10.3: The value of an expression shall not be assigned to an object with a narrower essential type or of a different essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="142"/>
+        </error>
+        <error id="misra-c2012-10.3" severity="style" msg="Required Rule 10.3: The value of an expression shall not be assigned to an object with a narrower essential type or of a different essential type category" verbose="Required Rule 10.3: The value of an expression shall not be assigned to an object with a narrower essential type or of a different essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="145"/>
+        </error>
+        <error id="misra-c2012-10.4" severity="style" msg="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" verbose="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="43"/>
+        </error>
+        <error id="misra-c2012-10.4" severity="style" msg="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" verbose="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="64"/>
+        </error>
+        <error id="misra-c2012-10.4" severity="style" msg="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" verbose="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="66"/>
+        </error>
+        <error id="misra-c2012-10.4" severity="style" msg="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" verbose="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="67"/>
+        </error>
+        <error id="misra-c2012-10.4" severity="style" msg="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" verbose="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="69"/>
+        </error>
+        <error id="misra-c2012-10.4" severity="style" msg="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" verbose="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="70"/>
+        </error>
+        <error id="misra-c2012-10.4" severity="style" msg="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" verbose="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="72"/>
+        </error>
+        <error id="misra-c2012-10.4" severity="style" msg="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" verbose="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="118"/>
+        </error>
+        <error id="misra-c2012-10.4" severity="style" msg="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" verbose="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="136"/>
+        </error>
+        <error id="misra-c2012-10.4" severity="style" msg="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" verbose="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="138"/>
+        </error>
+        <error id="misra-c2012-10.4" severity="style" msg="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" verbose="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="139"/>
+        </error>
+        <error id="misra-c2012-10.4" severity="style" msg="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" verbose="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="141"/>
+        </error>
+        <error id="misra-c2012-10.4" severity="style" msg="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" verbose="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="142"/>
+        </error>
+        <error id="misra-c2012-10.4" severity="style" msg="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" verbose="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="144"/>
+        </error>
+        <error id="misra-c2012-10.4" severity="style" msg="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" verbose="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="145"/>
+        </error>
+        <error id="misra-c2012-10.4" severity="style" msg="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" verbose="Required Rule 10.4: Both operands of an operator in which the usual arithmetic conversions are performed shall have the same essential type category" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="147"/>
+        </error>
+        <error id="misra-c2012-10.7" severity="style" msg="Required Rule 10.7: If a composite expression is used as one operand of an operator in which the usual arithmetic conversions are performed then the other operand shall not have wider essential type" verbose="Required Rule 10.7: If a composite expression is used as one operand of an operator in which the usual arithmetic conversions are performed then the other operand shall not have wider essential type" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="66"/>
+        </error>
+        <error id="misra-c2012-10.7" severity="style" msg="Required Rule 10.7: If a composite expression is used as one operand of an operator in which the usual arithmetic conversions are performed then the other operand shall not have wider essential type" verbose="Required Rule 10.7: If a composite expression is used as one operand of an operator in which the usual arithmetic conversions are performed then the other operand shall not have wider essential type" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="69"/>
+        </error>
+        <error id="misra-c2012-10.7" severity="style" msg="Required Rule 10.7: If a composite expression is used as one operand of an operator in which the usual arithmetic conversions are performed then the other operand shall not have wider essential type" verbose="Required Rule 10.7: If a composite expression is used as one operand of an operator in which the usual arithmetic conversions are performed then the other operand shall not have wider essential type" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="72"/>
+        </error>
+        <error id="misra-c2012-10.7" severity="style" msg="Required Rule 10.7: If a composite expression is used as one operand of an operator in which the usual arithmetic conversions are performed then the other operand shall not have wider essential type" verbose="Required Rule 10.7: If a composite expression is used as one operand of an operator in which the usual arithmetic conversions are performed then the other operand shall not have wider essential type" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="138"/>
+        </error>
+        <error id="misra-c2012-10.7" severity="style" msg="Required Rule 10.7: If a composite expression is used as one operand of an operator in which the usual arithmetic conversions are performed then the other operand shall not have wider essential type" verbose="Required Rule 10.7: If a composite expression is used as one operand of an operator in which the usual arithmetic conversions are performed then the other operand shall not have wider essential type" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="141"/>
+        </error>
+        <error id="misra-c2012-10.7" severity="style" msg="Required Rule 10.7: If a composite expression is used as one operand of an operator in which the usual arithmetic conversions are performed then the other operand shall not have wider essential type" verbose="Required Rule 10.7: If a composite expression is used as one operand of an operator in which the usual arithmetic conversions are performed then the other operand shall not have wider essential type" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="144"/>
+        </error>
+        <error id="misra-c2012-10.7" severity="style" msg="Required Rule 10.7: If a composite expression is used as one operand of an operator in which the usual arithmetic conversions are performed then the other operand shall not have wider essential type" verbose="Required Rule 10.7: If a composite expression is used as one operand of an operator in which the usual arithmetic conversions are performed then the other operand shall not have wider essential type" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="147"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="66"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="69"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="72"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="138"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="141"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="144"/>
+        </error>
+        <error id="misra-c2012-12.1" severity="style" msg="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" verbose="Advisory Rule 12.1: The precedence of operators within expressions should be made explicit" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="147"/>
+        </error>
+        <error id="misra-c2012-14.4" severity="style" msg="Required Rule 14.4: The controlling expression of an if statement and the controlling expression of an iteration-statement shall have essentially Boolean type" verbose="Required Rule 14.4: The controlling expression of an if statement and the controlling expression of an iteration-statement shall have essentially Boolean type" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="125"/>
+        </error>
+        <error id="misra-c2012-15.6" severity="style" msg="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" verbose="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="38"/>
+        </error>
+        <error id="misra-c2012-15.6" severity="style" msg="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" verbose="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="40"/>
+        </error>
+        <error id="misra-c2012-15.6" severity="style" msg="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" verbose="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="42"/>
+        </error>
+        <error id="misra-c2012-15.6" severity="style" msg="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" verbose="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="53"/>
+        </error>
+        <error id="misra-c2012-15.6" severity="style" msg="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" verbose="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="54"/>
+        </error>
+        <error id="misra-c2012-15.6" severity="style" msg="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" verbose="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="113"/>
+        </error>
+        <error id="misra-c2012-15.6" severity="style" msg="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" verbose="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="115"/>
+        </error>
+        <error id="misra-c2012-15.6" severity="style" msg="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" verbose="Required Rule 15.6: The body of an iteration-statement or a selection-statement shall be a compound-statement" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="117"/>
+        </error>
+        <error id="misra-c2012-17.8" severity="style" msg="Advisory Rule 17.8: A function parameter should not be modified" verbose="Advisory Rule 17.8: A function parameter should not be modified" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="55"/>
+        </error>
+        <error id="misra-c2012-17.8" severity="style" msg="Advisory Rule 17.8: A function parameter should not be modified" verbose="Advisory Rule 17.8: A function parameter should not be modified" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="66"/>
+        </error>
+        <error id="misra-c2012-17.8" severity="style" msg="Advisory Rule 17.8: A function parameter should not be modified" verbose="Advisory Rule 17.8: A function parameter should not be modified" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="69"/>
+        </error>
+        <error id="misra-c2012-17.8" severity="style" msg="Advisory Rule 17.8: A function parameter should not be modified" verbose="Advisory Rule 17.8: A function parameter should not be modified" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="72"/>
+        </error>
+        <error id="misra-c2012-17.8" severity="style" msg="Advisory Rule 17.8: A function parameter should not be modified" verbose="Advisory Rule 17.8: A function parameter should not be modified" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="127"/>
+        </error>
+        <error id="misra-c2012-17.8" severity="style" msg="Advisory Rule 17.8: A function parameter should not be modified" verbose="Advisory Rule 17.8: A function parameter should not be modified" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="138"/>
+        </error>
+        <error id="misra-c2012-17.8" severity="style" msg="Advisory Rule 17.8: A function parameter should not be modified" verbose="Advisory Rule 17.8: A function parameter should not be modified" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="141"/>
+        </error>
+        <error id="misra-c2012-17.8" severity="style" msg="Advisory Rule 17.8: A function parameter should not be modified" verbose="Advisory Rule 17.8: A function parameter should not be modified" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="144"/>
+        </error>
+        <error id="misra-c2012-17.8" severity="style" msg="Advisory Rule 17.8: A function parameter should not be modified" verbose="Advisory Rule 17.8: A function parameter should not be modified" file0="analiza-cppcheck-build-dir/uart.a1.dump" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="147"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;WriteUART1dec2string&amp;#039; is never used." verbose="The function &amp;#039;WriteUART1dec2string&amp;#039; is never used." cwe="561" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="60"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;WriteUART2dec2string&amp;#039; is never used." verbose="The function &amp;#039;WriteUART2dec2string&amp;#039; is never used." cwe="561" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="132"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;print_DEBUG&amp;#039; is never used." verbose="The function &amp;#039;print_DEBUG&amp;#039; is never used." cwe="561" sinceDate="26.6.23.">
+            <location file="../Primenjena-Elektronika/Projekat_2_tenk/Projekat_tenk.X/uart.c" line="48"/>
+        </error>
+    </errors>
+</results>

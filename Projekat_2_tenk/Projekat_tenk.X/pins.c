@@ -1,7 +1,7 @@
 #include "pins.h"
 #include <p30fxxxx.h>
 
-void InitPins()
+void InitPins(void)
 {
     // Inicjalizacija ulazno/izlaznih pinova
     
@@ -12,7 +12,7 @@ void InitPins()
     TRISBbits.TRISB2 = 0;   // Analogna letvica
     TRISBbits.TRISB3 = 0;   // Analogna letvica
     TRISBbits.TRISB4 = 0;   // Analogna letvica
-    // TRISBbits.TRISB5 = 0;   // Analogna letvica
+    TRISBbits.TRISB5 = 0;   // Analogna letvica
     TRISBbits.TRISB9 = 1;   // Rsens1
     TRISBbits.TRISB10 = 1;  // Rsens2
     TRISBbits.TRISB11 = 0;  // IN2 drajvera
@@ -36,7 +36,7 @@ void InitPins()
     ADPCFGbits.PCFG2 = 1;
     ADPCFGbits.PCFG3 = 1;
     ADPCFGbits.PCFG4 = 1;
-    // ADPCFGbits.PCFG5 = 1;
+    ADPCFGbits.PCFG5 = 1;
     ADPCFGbits.PCFG9 = 0;
     ADPCFGbits.PCFG10 = 0;
     ADPCFGbits.PCFG11 = 1;
