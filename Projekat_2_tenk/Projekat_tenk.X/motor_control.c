@@ -32,7 +32,7 @@ void stani()
 
 void voziNapred()
 {
-    PWM_set_duty_cycle(150, 70);
+    PWM_set_duty_cycle(130, 150);
     
     LATFbits.LATF1 = 1; // IN1
     LATBbits.LATB11 = 0; // IN2
@@ -41,9 +41,9 @@ void voziNapred()
     LATFbits.LATF0 = 1; // IN4
 }
 
-void voziNazad() // NE MOZE
+void voziNazad()
 {
-    PWM_set_duty_cycle(150, 150);
+    PWM_set_duty_cycle(130, 150);
     
     LATFbits.LATF1 = 0; // IN1
     LATBbits.LATB11 = 1; // IN2
@@ -68,7 +68,7 @@ void skreniLevo()
 
 void skreniDesno()
 {
-    PWM_set_duty_cycle(150, 150);
+    PWM_set_duty_cycle(200, 200);
     
     // Desni motor miruje
     LATFbits.LATF1 = 0; // IN1

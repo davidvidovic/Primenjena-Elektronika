@@ -30,6 +30,7 @@ int distancaDesno;
 int distancaLevo;
 int duty_cycle;
 unsigned char flag_ispis;
+unsigned char reverse_flag;
 
 char word_START[10] = "";
 int indeks = 0;
@@ -330,10 +331,11 @@ int main(void) {
     
     indeks = 0;   
     flag_ispis = 0;
-    
+    reverse_flag = 0;    
     // Glavna - super petlja
     while(1)
     {
+        
        print_BLE("Za pokretanje posaljite 'START'.\n");
         
         while(word_START[0] != 'S' &&
@@ -372,7 +374,7 @@ int main(void) {
                 
                 // Skretanje levo, u trajanju delaya
                 skreniLevo();
-                Delay_ms(820);
+                Delay_ms(790);
                 
                 // Nakon izvrsenog skretanja potrebno je voziti unapred dok se ponovo ne uhvati leva ivica
                 
@@ -402,16 +404,16 @@ int main(void) {
             }
             else if(distancaDesno > 12 + 8) // 8cm udaljen od desne ivice tenka
             {
-                print_BLE("Skrecem desno\n");
-                flag_ispis = 0;
-                
                 // Pauziraj pola sekunde prije skretanja
                 stani();
                 Delay_ms(500);
                 
+                print_BLE("Skrecem desno\n");
+                flag_ispis = 0;
+                
                 // Skretanje desno, u trajanju delaya
                 skreniDesno();
-                Delay_ms(850);
+                Delay_ms(810);
                 
                 // Nakon izvrsenog skretanja potrebno je voziti unapred dok se ponovo ne uhvati leva ivica
                 stani();
@@ -419,14 +421,59 @@ int main(void) {
                 voziNapred();
                 Delay_ms(500);
             }
-            else
+            else if(distancaDesno < 12 + 7) 
             {
-                //voziNazad();
-                print_BLE("Vozim unazad\n");
+                // Pauziraj pola sekunde prije skretanja
+                stani();
+                Delay_ms(500);
+                
+                meriDesno();
+                if(distancaDesno < 12 + 8)
+                {
+                    voziNazad();
+                    print_BLE("Vozim unazad\n");
+
+                    meriDesno();
+                    while(distancaDesno < 12 + 8)
+                    {
+                        Delay_ms(50);
+                        meriDesno();
+                    }
+
+                    // Sacekaj da se dovoljno udalji 
+                    Delay_ms(4000);
+                    stani();
+
+                    print_BLE("Skrecem desno\n");
+                    flag_ispis = 0;
+
+                    // Pauziraj pola sekunde prije skretanja
+                    stani();
+                    Delay_ms(500);
+
+                    // Skretanje desno, u trajanju delaya
+                    skreniDesno();
+                    Delay_ms(800);
+                    
+                    stani();
+                    Delay_ms(500);
+                    
+                    voziNapred();
+                    Delay_ms(3000);
+                    
+                    meriLevo();
+                    while(distancaLevo > 25) 
+                    {
+                        voziNapred();
+                        Delay_ms(100);
+                        meriLevo();
+                    }
+                }
             }
         }
         
         print_BLE("Zaustavljanje.\n"); 
+       
     }
     return 0;
 } 
